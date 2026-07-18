@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { LeadForm } from "@/components/lead-form";
 import { SectionTitle } from "@/components/section-title";
+import { CONTACT } from "@/lib/site-data";
 
 export const metadata: Metadata = {
   title: "Contacto",
-  description: "Contacto oficial de Hocker AGI Technologies para proyectos, ventas y alianzas.",
+  description: "Contacto comercial de Hocker AGI Technologies.",
 };
 
 export default function ContactPage() {
@@ -12,21 +14,14 @@ export default function ContactPage() {
     <div>
       <section className="page-hero">
         <div className="container">
-          <div className="panel">
+          <div className="panel hero-panel">
             <div className="kicker">Contacto</div>
-            <h1 className="hero-title" style={{ fontSize: "clamp(34px, 6vw, 62px)" }}>
-              Hablemos de tu proyecto
-            </h1>
-            <p className="hero-text" style={{ maxWidth: 860 }}>
-              Si necesitas una web, un sistema, una automatización o una estrategia comercial con IA, aquí empieza.
-              La respuesta ideal es rápida, clara y orientada a convertir.
-            </p>
+            <h1 className="hero-title">Hablemos de tu siguiente venta.</h1>
+            <p className="hero-text">Cuéntanos qué necesitas y te respondemos por WhatsApp o email con una ruta concreta.</p>
             <div className="hero-actions">
-              <a className="button button-primary" href="mailto:hocker.agi@gmail.com">Enviar email</a>
-              <a className="button button-secondary" href="https://wa.me/526632091143" target="_blank" rel="noreferrer">
-                Abrir WhatsApp
-              </a>
-              <Link className="button button-secondary" href="/portfolio">Ver portafolio</Link>
+              <a href={CONTACT.whatsapp} className="button button-primary button-big" target="_blank" rel="noreferrer">WhatsApp</a>
+              <a href={`mailto:${CONTACT.email}`} className="button button-secondary button-big">Email</a>
+              <Link href="/callback" className="button button-secondary button-big">Pedir callback</Link>
             </div>
           </div>
         </div>
@@ -34,20 +29,17 @@ export default function ContactPage() {
 
       <section className="section">
         <div className="container">
-          <SectionTitle eyebrow="Canales" title="Conexión directa" description="La web debe facilitar el siguiente paso y no esconder el contacto." />
+          <SectionTitle eyebrow="Formulario" title="Escribe y abre el canal correcto" description="Sin formularios infinitos ni procesos raros: directo a la conversación." />
+          <LeadForm mode="contact" />
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
           <div className="grid-3 section-grid">
-            <article className="card card-pad">
-              <h3>Email</h3>
-              <p><a href="mailto:hocker.agi@gmail.com">hocker.agi@gmail.com</a></p>
-            </article>
-            <article className="card card-pad">
-              <h3>WhatsApp</h3>
-              <p><a href="https://wa.me/526632091143" target="_blank" rel="noreferrer">663 209 1143</a></p>
-            </article>
-            <article className="card card-pad">
-              <h3>Sitio oficial</h3>
-              <p><a href="https://hockeragi.vercel.app" target="_blank" rel="noreferrer">hockeragi.vercel.app</a></p>
-            </article>
+            <article className="card card-pad service-card"><h3>Email</h3><p>{CONTACT.email}</p></article>
+            <article className="card card-pad service-card"><h3>WhatsApp</h3><p>{CONTACT.whatsappPhone}</p></article>
+            <article className="card card-pad service-card"><h3>Respuesta</h3><p>Directa y sin vueltas.</p></article>
           </div>
         </div>
       </section>

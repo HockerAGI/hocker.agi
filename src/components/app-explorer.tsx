@@ -13,34 +13,55 @@ const FILTERS: { key: AppGroup | "all"; label: string }[] = [
   { key: "crm", label: "CRM" },
   { key: "cloud", label: "Cloud" },
   { key: "security", label: "Seguridad" },
-  { key: "entertainment", label: "Entretenimiento" },
-  { key: "operations", label: "Operación" },
+  { key: "entertainment", label: "Gaming" },
+  { key: "operations", label: "Ops" },
 ];
 
 export function AppExplorer({ apps }: { apps: AppItem[] }) {
   const [active, setActive] = useState<AppGroup | "all">("all");
-  const filtered = useMemo(
-    () => (active === "all" ? apps : apps.filter((app) => app.group === active)),
-    [active, apps],
-  );
+  const [query, setQuery] = useState("");
+
+  const filtered = useMemo(() => {
+    const search = query.trim().toLowerCase();
+    return apps.filter((app) => {
+      const groupOk = active === "all" ? true : app.group === active;
+      const searchOk =
+        search.length === 0 ||
+        [app.title, app.short, app.tagline, app.summary, app.audience, ...app.highlights, ...app.agis]
+          .join(" ")
+          .toLowerCase()
+          .includes(search);
+      return groupOk && searchOk;
+    });
+  }, [active, apps, query]);
 
   return (
     <div className="section-grid">
-      <div className="filters" role="tablist" aria-label="Filtros de aplicaciones">
-        {FILTERS.map((filter) => (
-          <button
-            key={filter.key}
-            type="button"
-            className="filter-button"
-            aria-pressed={active === filter.key}
-            onClick={() => setActive(filter.key)}
-          >
-            {filter.label}
-          </button>
-        ))}
+      <div className="explorer-bar">
+        <input
+          className="search-input"
+          type="search"
+          placeholder="Buscar app, función o AGI"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          aria-label="Buscar aplicaciones"
+        />
+        <div className="filters" role="tablist" aria-label="Filtros de aplicaciones">
+          {FILTERS.map((filter) => (
+            <button
+              key={filter.key}
+              type="button"
+              className="filter-button"
+              aria-pressed={active === filter.key}
+              onClick={() => setActive(filter.key)}
+            >
+              {filter.label}
+            </button>
+          ))}
+        </div>
       </div>
 
-      <div className="grid-3 section-grid">
+      <div className="grid-2 section-grid">
         {filtered.map((app) => (
           <article key={app.slug} className="card card-pad app-card">
             <div className="app-top">
@@ -51,20 +72,18 @@ export function AppExplorer({ apps }: { apps: AppItem[] }) {
               </div>
             </div>
             <p>{app.summary}</p>
-            <p style={{ marginTop: -4, color: "white" }}>
-              <strong>Ideal para:</strong> {app.audience}
-            </p>
+            <p className="small-strong"><strong>Ideal para:</strong> {app.audience}</p>
+            <div className="tag-row">
+              <span className="tag"><strong>{app.badge}</strong></span>
+              <span className="tag">{app.status}</span>
+            </div>
             <div className="tag-row">
               {app.highlights.map((item) => (
-                <span key={item} className="tag"><strong>•</strong> {item}</span>
+                <span key={item} className="tag tag-soft">{item}</span>
               ))}
             </div>
-            <div className="tag-row">
-              <span className="tag"><strong>AGIs:</strong> {app.agis.join(" · ")}</span>
-              <span className="tag"><strong>Status:</strong> {app.status}</span>
-            </div>
-            <Link href={`/apps/${app.slug}`} className="button button-secondary" style={{ width: "fit-content" }}>
-              Ver módulo
+            <Link href={`/apps/${app.slug}`} className="button button-secondary button-inline">
+              Abrir módulo
             </Link>
           </article>
         ))}

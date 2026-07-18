@@ -12,43 +12,61 @@ const FILTERS: { key: PortfolioGroup | "all"; label: string }[] = [
 
 export function PortfolioExplorer({ items }: { items: PortfolioItem[] }) {
   const [active, setActive] = useState<PortfolioGroup | "all">("all");
-  const filtered = useMemo(
-    () => (active === "all" ? items : items.filter((item) => item.category === active)),
-    [active, items],
-  );
+  const [query, setQuery] = useState("");
+
+  const filtered = useMemo(() => {
+    const search = query.trim().toLowerCase();
+    return items.filter((item) => {
+      const groupOk = active === "all" ? true : item.category === active;
+      const searchOk =
+        search.length === 0 ||
+        [item.title, item.role, item.summary, item.result, ...item.stack].join(" ").toLowerCase().includes(search);
+      return groupOk && searchOk;
+    });
+  }, [active, items, query]);
 
   return (
     <div className="section-grid">
-      <div className="filters">
-        {FILTERS.map((filter) => (
-          <button
-            key={filter.key}
-            type="button"
-            className="filter-button"
-            aria-pressed={active === filter.key}
-            onClick={() => setActive(filter.key)}
-          >
-            {filter.label}
-          </button>
-        ))}
+      <div className="explorer-bar">
+        <input
+          className="search-input"
+          type="search"
+          placeholder="Buscar caso, habilidad o resultado"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          aria-label="Buscar portfolio"
+        />
+        <div className="filters">
+          {FILTERS.map((filter) => (
+            <button
+              key={filter.key}
+              type="button"
+              className="filter-button"
+              aria-pressed={active === filter.key}
+              onClick={() => setActive(filter.key)}
+            >
+              {filter.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="grid-2 section-grid">
         {filtered.map((item) => (
-          <article key={item.slug} className="card card-pad">
+          <article key={item.slug} className="card card-pad portfolio-card">
             <div className="tag-row" style={{ marginBottom: 12 }}>
               <span className="tag"><strong>{item.year}</strong></span>
               <span className="tag">{item.category}</span>
             </div>
-            <h3 style={{ fontSize: 22, marginBottom: 10 }}>{item.title}</h3>
-            <p style={{ marginTop: 0 }}>{item.role}</p>
+            <h3>{item.title}</h3>
+            <p className="small-strong">{item.role}</p>
             <p>{item.summary}</p>
             <div className="tag-row">
               {item.stack.map((stack) => (
-                <span key={stack} className="tag">{stack}</span>
+                <span key={stack} className="tag tag-soft">{stack}</span>
               ))}
             </div>
-            <p style={{ marginTop: 12, color: "white" }}>{item.result}</p>
+            <p className="result">{item.result}</p>
           </article>
         ))}
       </div>

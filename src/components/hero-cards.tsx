@@ -1,19 +1,33 @@
 import Image from "next/image";
 import Link from "next/link";
-import { APPS, STATS } from "@/lib/site-data";
+import { APPS, PROFILE, STATS } from "@/lib/site-data";
 
 export function HeroCards() {
   return (
-    <div className="hero-image">
-      <Image
-        className="hero-logo"
-        src="/brand/hocker-one-logo.png"
-        alt="Hocker ONE"
-        width={1200}
-        height={1200}
-        priority
-      />
-      <div className="hero-caption">Hocker ONE · núcleo del ecosistema</div>
+    <div className="hero-stage">
+      <div className="hero-stage-top">
+        <div className="hero-logo-frame">
+          <Image
+            className="hero-logo"
+            src="/brand/hocker-agi-technologies.png"
+            alt="Hocker AGI Technologies"
+            width={1120}
+            height={1120}
+            priority
+          />
+        </div>
+        <div className="hero-stage-copy">
+          <div className="kicker">Founder · Portfolio · Ecosystem</div>
+          <h3>{PROFILE.name}</h3>
+          <p>{PROFILE.title}</p>
+          <p className="hero-stage-text">{PROFILE.summary}</p>
+          <div className="hero-bullets">
+            {PROFILE.bullets.map((bullet) => (
+              <span key={bullet} className="tag tag-soft">{bullet}</span>
+            ))}
+          </div>
+        </div>
+      </div>
 
       <div className="hero-metrics">
         {STATS.map((stat) => (
@@ -25,10 +39,11 @@ export function HeroCards() {
         ))}
       </div>
 
-      <div className="panel" style={{ width: "100%" }}>
-        <div className="panel-grid">
+      <div className="panel panel-tight">
+        <div className="panel-headline">Acceso rápido a las piezas más visibles</div>
+        <div className="panel-grid panel-grid-compact">
           {APPS.slice(0, 4).map((app) => (
-            <Link key={app.slug} href={`/apps/${app.slug}`} className="panel-card">
+            <Link key={app.slug} href={`/apps/${app.slug}`} className="panel-card panel-card-link">
               <Image src={app.logo} alt={app.title} width={64} height={64} className="app-logo" />
               <div>
                 <div className="label">{app.badge}</div>

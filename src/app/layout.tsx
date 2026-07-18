@@ -2,39 +2,39 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Script from "next/script";
 import { SiteShell } from "@/components/site-shell";
+import { SITE, CONTACT } from "@/lib/site-data";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://hockeragi.vercel.app"),
+  metadataBase: new URL(SITE.url),
   title: {
-    default: "Hocker AGI Technologies",
-    template: "%s | Hocker AGI Technologies",
+    default: SITE.brand,
+    template: `%s | ${SITE.brand}`,
   },
-  description:
-    "Hocker AGI Technologies: IA, marketing y software que venden, automatizan y escalan.",
+  description: SITE.description,
   keywords: [
     "Hocker AGI Technologies",
     "NOVA",
     "Hocker ONE",
-    "AGIs",
-    "automatización",
+    "agentes IA",
     "marketing digital",
+    "automatización",
     "apps",
     "portfolio",
   ],
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Hocker AGI Technologies",
-    description: "IA, marketing y software que venden, automatizan y escalan.",
-    url: "https://hockeragi.vercel.app",
-    siteName: "Hocker AGI Technologies",
+    title: SITE.brand,
+    description: SITE.tagline,
+    url: SITE.url,
+    siteName: SITE.brand,
     images: ["/og-image.png"],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hocker AGI Technologies",
-    description: "IA, marketing y software que venden, automatizan y escalan.",
+    title: SITE.brand,
+    description: SITE.tagline,
     images: ["/og-image.png"],
   },
   robots: { index: true, follow: true },
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="es">
-      <body className="bg-[#020610] text-white antialiased" style={{ fontFamily: "Inter, system-ui, sans-serif" }}>
+      <body>
         <Script
           id="structured-data"
           type="application/ld+json"
@@ -51,18 +51,19 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "Hocker AGI Technologies",
-              url: "https://hockeragi.vercel.app",
-              description:
-                "Hocker AGI Technologies: IA, marketing y software que venden, automatizan y escalan.",
-              email: "hocker.agi@gmail.com",
-              contactPoint: {
-                "@type": "ContactPoint",
-                contactType: "sales",
-                email: "hocker.agi@gmail.com",
-                availableLanguage: ["es", "en"],
-              },
-              sameAs: ["https://hockeragi.vercel.app"],
+              name: SITE.brand,
+              url: SITE.url,
+              description: SITE.description,
+              email: CONTACT.email,
+              sameAs: [SITE.url],
+              contactPoint: [
+                {
+                  "@type": "ContactPoint",
+                  contactType: "sales",
+                  email: CONTACT.email,
+                  availableLanguage: ["es", "en"],
+                },
+              ],
             }),
           }}
         />

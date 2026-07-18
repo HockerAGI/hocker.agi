@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Ecosistema de IA, marketing y software.",
     start_url: "/",
     display: "standalone",
-    background_color: "#050816",
+    background_color: "#03050b",
     theme_color: "#0b1120",
     icons: [
       {

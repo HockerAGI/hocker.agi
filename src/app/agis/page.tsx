@@ -13,18 +13,15 @@ export default function AgisPage() {
     <div>
       <section className="page-hero">
         <div className="container">
-          <div className="panel">
+          <div className="panel hero-panel">
             <div className="kicker">AGIs</div>
-            <h1 className="hero-title" style={{ fontSize: "clamp(34px, 6vw, 62px)" }}>
-              NOVA dirige. Las demás AGIs especializan el trabajo.
+            <h1 className="hero-title">
+              NOVA dirige. Las demás AGIs hacen el trabajo fino.
             </h1>
-            <p className="hero-text" style={{ maxWidth: 860 }}>
-              Una IA central coordina y varias AGIs por función resuelven creatividad, infraestructura, seguridad,
-              legal, finanzas y operación.
-            </p>
+            <p className="hero-text">Cada una resuelve una función clara: estrategia, marketing, seguridad, legal, finanzas o infraestructura.</p>
             <div className="hero-actions">
-              <Link href="/contacto" className="button button-primary">Hablar del ecosistema</Link>
-              <Link href="/apps" className="button button-secondary">Ver apps</Link>
+              <Link href="/contacto" className="button button-primary button-big">Hablar del ecosistema</Link>
+              <Link href="/apps" className="button button-secondary button-big">Ver apps</Link>
             </div>
           </div>
         </div>
@@ -32,12 +29,21 @@ export default function AgisPage() {
 
       <section className="section">
         <div className="container">
-          <SectionTitle
-            eyebrow="Mapa real"
-            title="16 AGIs con rol claro"
-            description="Cada una aporta una función concreta. No son nombres decorativos: son piezas del sistema."
-          />
+          <SectionTitle eyebrow="Mapa real" title="16 AGIs con función concreta" description="No son nombres decorativos; son piezas del sistema con rol y trabajo definidos." />
           <AgiGrid />
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <div className="panel panel-cta">
+            <div className="kicker">Valor</div>
+            <h2>Más orden, más claridad, más velocidad para vender y operar.</h2>
+            <div className="hero-actions">
+              <Link href="/ecosistema" className="button button-primary button-big">Ver ecosistema</Link>
+              <Link href="/soluciones" className="button button-secondary button-big">Ver soluciones</Link>
+            </div>
+          </div>
         </div>
       </section>
     </div>

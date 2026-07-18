@@ -4,10 +4,10 @@ export function StatusTiles() {
   return (
     <div className="grid-4 section-grid">
       {STATS.map((stat) => (
-        <article key={stat.label} className="card card-pad">
-          <div className="kicker" style={{ fontSize: 11, letterSpacing: ".16em" }}>{stat.label}</div>
-          <h3 style={{ fontSize: 34, marginTop: 16, marginBottom: 8 }}>{stat.value}</h3>
-          <p style={{ margin: 0 }}>{stat.detail}</p>
+        <article key={stat.label} className="card card-pad stat-card">
+          <div className="kicker">{stat.label}</div>
+          <h3>{stat.value}</h3>
+          <p>{stat.detail}</p>
         </article>
       ))}
     </div>

@@ -45,12 +45,13 @@ export default async function AppDetailPage({ params }: PageProps) {
                 </div>
               </div>
               <Image
-                src={app.logo}
+                src={app.cover}
                 alt={app.title}
-                width={420}
-                height={420}
-                className="hero-logo"
+                width={520}
+                height={360}
+                className="hero-cover"
                 priority
+                style={{ objectFit: "cover", borderRadius: 28 }}
               />
             </div>
           </div>
