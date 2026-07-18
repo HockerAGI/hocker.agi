@@ -7,13 +7,14 @@ export function HeroCards() {
     <div className="hero-image">
       <Image
         className="hero-logo"
-        src="/brand/hocker-agi-technologies.png"
-        alt="Hocker AGI Technologies"
+        src="/brand/hocker-one-logo.png"
+        alt="Hocker ONE"
         width={1200}
         height={1200}
         priority
       />
-      <div className="hero-caption">Logo oficial del ecosistema</div>
+      <div className="hero-caption">Hocker ONE · núcleo del ecosistema</div>
+
       <div className="hero-metrics">
         {STATS.map((stat) => (
           <div className="metric" key={stat.label}>
@@ -23,17 +24,12 @@ export function HeroCards() {
           </div>
         ))}
       </div>
+
       <div className="panel" style={{ width: "100%" }}>
         <div className="panel-grid">
           {APPS.slice(0, 4).map((app) => (
             <Link key={app.slug} href={`/apps/${app.slug}`} className="panel-card">
-              <Image
-                src={app.logo}
-                alt={app.title}
-                width={64}
-                height={64}
-                className="app-logo"
-              />
+              <Image src={app.logo} alt={app.title} width={64} height={64} className="app-logo" />
               <div>
                 <div className="label">{app.badge}</div>
                 <div className="value">{app.title}</div>
