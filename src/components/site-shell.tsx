@@ -5,11 +5,14 @@ import { CONTACT, SITE } from "@/lib/site-data";
 
 const navItems = [
   { href: "/", label: "Inicio" },
+  { href: "/empresa", label: "Empresa" },
   { href: "/ecosistema", label: "Ecosistema" },
   { href: "/apps", label: "Apps" },
   { href: "/agis", label: "AGIs" },
+  { href: "/fases", label: "Fases" },
   { href: "/portfolio", label: "Portfolio" },
   { href: "/soluciones", label: "Soluciones" },
+  { href: "/live", label: "Live" },
   { href: "/contacto", label: "Contacto" },
 ];
 
@@ -81,10 +84,17 @@ export function SiteShell({ children }: { children: ReactNode }) {
             </div>
             <div>
               <h4>Explorar</h4>
+              <p><Link href="/empresa">Empresa</Link></p>
               <p><Link href="/ecosistema">Ecosistema</Link></p>
               <p><Link href="/apps">Apps</Link></p>
               <p><Link href="/agis">AGIs</Link></p>
+            </div>
+            <div>
+              <h4>Ruta comercial</h4>
+              <p><Link href="/fases">Fases</Link></p>
               <p><Link href="/portfolio">Portfolio</Link></p>
+              <p><Link href="/soluciones">Soluciones</Link></p>
+              <p><Link href="/live">Live</Link></p>
             </div>
             <div>
               <h4>Contacto</h4>

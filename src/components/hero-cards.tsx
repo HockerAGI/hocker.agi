@@ -4,11 +4,11 @@ import { APPS, PROFILE, STATS } from "@/lib/site-data";
 
 export function HeroCards() {
   return (
-    <div className="hero-stage">
+    <div className="hero-stage hero-stage-premium">
       <div className="hero-stage-top">
-        <div className="hero-logo-frame">
+        <div className="hero-logo-frame hero-logo-frame-premium">
           <Image
-            className="hero-logo"
+            className="hero-logo hero-logo-premium"
             src="/brand/hocker-agi-technologies.png"
             alt="Hocker AGI Technologies"
             width={1120}
@@ -17,10 +17,9 @@ export function HeroCards() {
           />
         </div>
         <div className="hero-stage-copy">
-          <div className="kicker">Founder · Portfolio · Ecosystem</div>
+          <div className="kicker">Official site · premium brand</div>
           <h3>{PROFILE.name}</h3>
           <p>{PROFILE.title}</p>
-          <p className="hero-stage-text">{PROFILE.summary}</p>
           <div className="hero-bullets">
             {PROFILE.bullets.map((bullet) => (
               <span key={bullet} className="tag tag-soft">{bullet}</span>
@@ -40,7 +39,7 @@ export function HeroCards() {
       </div>
 
       <div className="panel panel-tight">
-        <div className="panel-headline">Acceso rápido a las piezas más visibles</div>
+        <div className="panel-headline">Acceso rápido a los módulos más visibles</div>
         <div className="panel-grid panel-grid-compact">
           {APPS.slice(0, 4).map((app) => (
             <Link key={app.slug} href={`/apps/${app.slug}`} className="panel-card panel-card-link">

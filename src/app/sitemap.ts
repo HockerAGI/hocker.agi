@@ -5,13 +5,16 @@ const base = "https://hockeragi.vercel.app";
 
 const routes = [
   "/",
+  "/empresa",
   "/ecosistema",
   "/soluciones",
   "/apps",
+  "/fases",
   "/portfolio",
   "/agis",
   "/contacto",
   "/callback",
+  "/live",
   "/status",
   "/legal/terms",
   "/legal/privacy",

@@ -72,9 +72,9 @@ export const PROFILE = {
   summary:
     "Fundador de Hocker AGI Technologies. Combina marketing, automatización, desarrollo y creatividad para construir sistemas que venden, operan y escalan.",
   bullets: [
-    "Campañas, funnels y performance real",
+    "Ads, funnels y performance real",
     "Apps, paneles y automatización full stack",
-    "Contenido, branding y dirección creativa",
+    "Branding, contenido y dirección creativa",
   ],
 };
 
@@ -274,7 +274,7 @@ export const AGIS: AgiItem[] = [
   { slug: "chido-wins", name: "Chido Wins", role: "Juego y predicción", purpose: "Predice y optimiza el vertical gaming.", category: "entertainment", accent: "#f97316", human: "La mente de estrategia lúdica.", worksWith: ["Curvewind", "Numia", "Chido Gerente"] },
   { slug: "chido-gerente", name: "Chido Gerente", role: "Operación gaming", purpose: "Administra bonos, usuarios, métricas y flujo.", category: "entertainment", accent: "#facc15", human: "La operación del vertical Chido.", worksWith: ["Chido Wins", "Numia", "Jurix"] },
   { slug: "shadows", name: "Shadows", role: "Microtareas efímeras", purpose: "Crea módulos temporales para pruebas o tareas cortas.", category: "ops", accent: "#94a3b8", human: "La capa invisible de soporte.", worksWith: ["NOVA", "Syntia", "Vertx"] },
-  { slug: "revia", name: "Revia", role: "Arquitecto comercial", purpose: "Automatiza ingresos, respuesta y cierre comercial.", category: "strategy", accent: "#60a5fa", human: "El motor de ventas del ecosistema.", worksWith: ["NOVA", "Numia", "Hostia"] },
+  { slug: "revia", name: "REVIA", role: "Arquitecto comercial", purpose: "Motor comercial autónomo para ingresos, respuesta y cierre.", category: "strategy", accent: "#60a5fa", human: "El motor de ventas del ecosistema.", worksWith: ["NOVA", "Numia", "Hostia"] },
 ];
 
 export const SERVICES: ServiceItem[] = [
@@ -302,3 +302,104 @@ export const FAQS = [
   { q: "¿Se puede entrar al panel?", a: "Sí, pero el acceso privado vive separado del sitio público." },
   { q: "¿Trabajan por módulos?", a: "Sí. Cada solución puede contratarse por separado o como ecosistema completo." },
 ];
+
+
+export type PhaseItem = {
+  number: number;
+  title: string;
+  summary: string;
+  deliverable: string;
+};
+
+export const PHASES: PhaseItem[] = [
+  {
+    number: 1,
+    title: 'Fundamentos del sistema',
+    summary: 'Lenguaje visual, filosofía de marca y reglas base de la experiencia.',
+    deliverable: 'Manifiesto visual, mapa de información y tokens iniciales.',
+  },
+  {
+    number: 2,
+    title: 'Master Design System',
+    summary: 'Componentes reutilizables para que todo se sienta de la misma familia.',
+    deliverable: 'Buttons, cards, nav, forms, states y patrones compartidos.',
+  },
+  {
+    number: 3,
+    title: 'Frontend arquitectura',
+    summary: 'App Router, Server/Client separation y rutas por dominio funcional.',
+    deliverable: 'Layouts persistentes, navegación adaptativa y rutas profundas.',
+  },
+  {
+    number: 4,
+    title: 'Motion, accesibilidad, SEO y performance',
+    summary: 'La capa premium: velocidad, contraste, jerarquía y descubribilidad.',
+    deliverable: 'Core Web Vitals, metadata, schema y navegación accesible.',
+  },
+  {
+    number: 5,
+    title: 'PWA, APK Android, WebAPK y TWA',
+    summary: 'Una sola base para web instalable, experiencia nativa y deep linking.',
+    deliverable: 'Manifest, offline parcial, instalación y experiencia móvil nativa.',
+  },
+  {
+    number: 6,
+    title: 'Deploy, QA, observabilidad y gobernanza',
+    summary: 'La plataforma debe operar con CI/CD, métricas y rollback claro.',
+    deliverable: 'GitHub Actions, Vercel, Supabase, logs y plan de reversa.',
+  },
+  {
+    number: 7,
+    title: 'Home comercial cinematográfica',
+    summary: 'Hero corto, capítulos claros y una transformación entendible.',
+    deliverable: 'Portada pública que vende el ecosistema sin saturación.',
+  },
+  {
+    number: 8,
+    title: 'Soluciones',
+    summary: 'Servicios agrupados como soluciones reales con CTA y propósito.',
+    deliverable: 'Bloques comerciales para marketing, software, AGI e infraestructura.',
+  },
+  {
+    number: 9,
+    title: 'Apps con landing propia',
+    summary: 'Cada producto se presenta como módulo independiente con branding propio.',
+    deliverable: 'Páginas por app, evidencia visual, beneficios y conversión.',
+  },
+  {
+    number: 10,
+    title: 'AGIs en organigrama vivo',
+    summary: 'NOVA al centro y especialistas por función en una red entendible.',
+    deliverable: 'Vista de AGIs con rol, relación y aplicación asociada.',
+  },
+  {
+    number: 11,
+    title: 'Mapa del ecosistema',
+    summary: 'La plataforma completa se ve como un sistema operativo empresarial.',
+    deliverable: 'Visual de niveles: núcleo, apps, AGIs, portfolio, empresa y live.',
+  },
+  {
+    number: 12,
+    title: 'Portfolio documental',
+    summary: 'Tu perfil como marketing + developer + creative, listo para vacantes y leads.',
+    deliverable: 'Casos, trayectoria, stack, resultados y acceso a CV/GitHub/LinkedIn.',
+  },
+  {
+    number: 13,
+    title: 'Empresa y doctrina',
+    summary: 'Valores, visión, modelo de trabajo, ética y explicación de NOVA.',
+    deliverable: 'Página institucional con lenguaje claro y premium.',
+  },
+  {
+    number: 14,
+    title: 'Contacto y REVIA',
+    summary: 'Un asistente comercial para convertir interés en conversación y venta.',
+    deliverable: 'Diagnóstico guiado, CRM, WhatsApp y correo conectados.',
+  },
+  {
+    number: 15,
+    title: 'Live, footer y automatización',
+    summary: 'Panel público, navegación final, legal y automatizaciones de cierre.',
+    deliverable: 'Status visible, enlaces clave y rutas de seguimiento comercial.',
+  },
+] as const;
