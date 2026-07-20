@@ -5,22 +5,20 @@ import { CONTACT, SITE } from "@/lib/site-data";
 
 const navItems = [
   { href: "/", label: "Inicio" },
-  { href: "/empresa", label: "Empresa" },
-  { href: "/ecosistema", label: "Ecosistema" },
+  { href: "/soluciones", label: "Soluciones" },
   { href: "/apps", label: "Apps" },
   { href: "/agis", label: "AGIs" },
-  { href: "/fases", label: "Fases" },
   { href: "/portfolio", label: "Portfolio" },
-  { href: "/soluciones", label: "Soluciones" },
+  { href: "/empresa", label: "Empresa" },
   { href: "/live", label: "Live" },
-  { href: "/contacto", label: "Contacto" },
 ];
 
 const dockItems = [
   { href: "/", label: "Inicio" },
+  { href: "/soluciones", label: "Sol" },
   { href: "/apps", label: "Apps" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/contacto", label: "Contacto" },
+  { href: "/portfolio", label: "Work" },
+  { href: "/contacto", label: "Lead" },
 ];
 
 export function SiteShell({ children }: { children: ReactNode }) {
@@ -35,8 +33,8 @@ export function SiteShell({ children }: { children: ReactNode }) {
               className="brand-logo"
               src="/brand/hocker-agi-technologies.png"
               alt="Hocker AGI Technologies"
-              width={88}
-              height={88}
+              width={96}
+              height={96}
               priority
             />
             <div className="brand-text">
@@ -57,9 +55,9 @@ export function SiteShell({ children }: { children: ReactNode }) {
             <a className="nav-ghost" href={CONTACT.whatsapp} target="_blank" rel="noreferrer">
               WhatsApp
             </a>
-            <a className="nav-cta" href={`mailto:${CONTACT.email}`}>
+            <Link className="nav-cta" href="/contacto">
               Cotizar
-            </a>
+            </Link>
           </div>
         </div>
       </header>
@@ -90,10 +88,10 @@ export function SiteShell({ children }: { children: ReactNode }) {
               <p><Link href="/agis">AGIs</Link></p>
             </div>
             <div>
-              <h4>Ruta comercial</h4>
-              <p><Link href="/fases">Fases</Link></p>
-              <p><Link href="/portfolio">Portfolio</Link></p>
+              <h4>Convertir</h4>
               <p><Link href="/soluciones">Soluciones</Link></p>
+              <p><Link href="/portfolio">Portfolio</Link></p>
+              <p><Link href="/fases">Fases</Link></p>
               <p><Link href="/live">Live</Link></p>
             </div>
             <div>

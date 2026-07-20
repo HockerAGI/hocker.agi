@@ -2,34 +2,39 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { AppExplorer } from "@/components/app-explorer";
 import { AgiGrid } from "@/components/agi-grid";
-import { FaqList } from "@/components/faq-list";
 import { HeroCards } from "@/components/hero-cards";
 import { PortfolioExplorer } from "@/components/portfolio-explorer";
 import { SectionTitle } from "@/components/section-title";
+import { PhaseTimeline } from "@/components/phase-timeline";
+import { LeadForm } from "@/components/lead-form";
 import { StatusTiles } from "@/components/status-tiles";
 import { APPS, PHASES, PORTFOLIO, SERVICES, SITE } from "@/lib/site-data";
 
-const levels = [
-  {
-    title: "Núcleo",
-    text: "NOVA coordina toda la operación y define prioridades.",
-  },
-  {
-    title: "Apps",
-    text: "Cada módulo resuelve una necesidad de negocio distinta.",
-  },
-  {
-    title: "AGIs",
-    text: "Especialistas por función para operar con más orden.",
-  },
-  {
-    title: "Portfolio",
-    text: "Tu experiencia real para vacantes y leads.",
-  },
-  {
-    title: "Empresa",
-    text: "Una marca que vende, explica y ejecuta.",
-  },
+const quickLinks = [
+  { href: "#soluciones", label: "Soluciones" },
+  { href: "#apps", label: "Apps" },
+  { href: "#agis", label: "AGIs" },
+  { href: "#portfolio", label: "Portfolio" },
+  { href: "#empresa", label: "Empresa" },
+  { href: "#contacto", label: "Contacto" },
+];
+
+const before = [
+  "Personas sueltas",
+  "Procesos manuales",
+  "Errores y fricción",
+  "Tiempo perdido",
+  "Costo alto",
+  "Pérdidas invisibles",
+];
+
+const after = [
+  "NOVA al centro",
+  "AGIs especializadas",
+  "Apps que convierten",
+  "Automatización real",
+  "Seguimiento y control",
+  "Resultados medibles",
 ];
 
 export const metadata: Metadata = {
@@ -45,10 +50,10 @@ export default function HomePage() {
           <div className="hero-copy hko-hero-copy">
             <div className="kicker">Plataforma unificada del ecosistema</div>
             <h1 className="hero-title hko-hero-title">
-              <span className="gradient">Construyo empresas que aprenden, piensan y operan mediante IA.</span>
+              <span className="gradient">No desarrollamos software. Construimos empresas que aprenden, piensan y operan mediante IA.</span>
             </h1>
             <p className="hero-text hko-hero-text">
-              NOVA orquesta, las AGIs especializan y las apps convierten. Todo bajo una sola marca, una sola lógica y una sola ruta comercial.
+              NOVA coordina. Las AGIs especializan. Las apps convierten. Todo bajo una sola marca, una sola lógica y una sola ruta comercial.
             </p>
             <div className="hero-actions hko-hero-actions">
               <Link href="/ecosistema" className="button button-primary button-big">Explorar ecosistema</Link>
@@ -67,83 +72,59 @@ export default function HomePage() {
 
       <section className="section">
         <div className="container">
+          <div className="chapter-rail" aria-label="Capítulos">
+            {quickLinks.map((link) => (
+              <a key={link.href} href={link.href} className="chapter-pill">
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section" id="nucleo">
+        <div className="container">
           <SectionTitle
             eyebrow="Nivel 0"
             title="NOVA es el núcleo. Todo nace desde aquí."
             description="No es un chatbot: es el cerebro que explica cómo trabaja toda la empresa."
           />
-          <div className="grid-3 section-grid">
-            {levels.map((level) => (
-              <article key={level.title} className="card card-pad service-card">
-                <div className="kicker">{level.title}</div>
-                <p>{level.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <SectionTitle
-            eyebrow="Capítulo 1"
-            title="¿Qué hace Hocker?"
-            description="No una agencia, no una software house, no una consultora: una empresa que crea infraestructura empresarial mediante AGI."
-          />
           <StatusTiles />
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="soluciones">
         <div className="container">
           <SectionTitle
-            eyebrow="Capítulo 2"
-            title="El problema de operar como hoy"
-            description="Personas, procesos, errores, tiempo, costo y pérdidas cuando el sistema no piensa contigo."
+            eyebrow="Capítulo 1"
+            title="Problema actual → Sistema Hocker"
+            description="La experiencia del sitio debe mostrar el salto claro entre operar manualmente y operar con un sistema unificado."
           />
-          <div className="grid-3 section-grid">
-            {[
-              ["Personas", "Dependencia manual y comunicación dispersa."],
-              ["Procesos", "Pasos sueltos que consumen tiempo."],
-              ["Pérdidas", "Fugas de oportunidad, control y margen."],
-            ].map(([title, text]) => (
-              <article key={title} className="card card-pad">
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </article>
-            ))}
+          <div className="story-grid section-grid">
+            <article className="card card-pad story-card">
+              <div className="kicker">Hoy</div>
+              <div className="tag-row">
+                {before.map((item) => <span className="tag" key={item}>{item}</span>)}
+              </div>
+              <p style={{ marginTop: 16 }}>Negocio fragmentado, decisiones lentas y operación sin una mente central.</p>
+            </article>
+            <article className="card card-pad story-card">
+              <div className="kicker">Con Hocker</div>
+              <div className="tag-row">
+                {after.map((item) => <span className="tag tag-soft" key={item}>{item}</span>)}
+              </div>
+              <p style={{ marginTop: 16 }}>Una sola lógica que ordena, vende, automatiza y da seguimiento al negocio.</p>
+            </article>
           </div>
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
-          <SectionTitle
-            eyebrow="Capítulo 3"
-            title="Después de Hocker"
-            description="Empresa → NOVA → AGIs → Apps → Automatización → Resultados."
-          />
-          <div className="grid-3 section-grid">
-            {[
-              ["NOVA", "Dirige la estrategia y las decisiones."],
-              ["AGIs", "Especialistas por función."],
-              ["Apps", "Módulos que venden y operan."],
-            ].map(([title, text]) => (
-              <article key={title} className="card card-pad">
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section">
+      <section className="section" id="servicios">
         <div className="container">
           <SectionTitle
             eyebrow="Nivel 2"
             title="Soluciones"
-            description="Servicios cortos, concretos y vendibles."
+            description="Servicios cortos, concretos y vendibles. Cada uno tiene un objetivo de negocio claro."
           />
           <div className="grid-3 section-grid">
             {SERVICES.map((service) => (
@@ -160,43 +141,44 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="apps">
         <div className="container">
           <SectionTitle
             eyebrow="Nivel 3"
             title="Apps"
-            description="Cada app con su propia mini landing, su propia identidad y su propio objetivo comercial."
+            description="Cada app con su propia mini landing, identidad y propósito comercial."
           />
           <AppExplorer apps={APPS} />
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="agis">
         <div className="container">
           <SectionTitle
             eyebrow="Nivel 4"
             title="AGIs"
-            description="No una lista: un organigrama vivo de especialistas conectados con NOVA."
+            description="Un organigrama vivo de especialistas conectados con NOVA."
           />
           <AgiGrid />
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="ecosistema">
         <div className="container">
           <SectionTitle
             eyebrow="Nivel 5"
             title="Ecosistema"
-            description="Todo conectado: empresa, NOVA, AGIs, apps, clientes, cloud y servidores."
+            description="Empresa, NOVA, AGIs, apps, clientes, cloud y servidores: todo conectado y legible."
           />
-          <div className="grid-3 section-grid">
+          <div className="story-grid section-grid">
             {[
               ["Empresa", "La marca que vende y organiza."],
               ["Cloud", "Infraestructura y despliegue."],
-              ["Usuarios", "La experiencia que convierte."],
+              ["Clientes", "La experiencia que convierte."],
+              ["Usuarios", "Las personas que entran al sistema."],
             ].map(([title, text]) => (
               <article key={title} className="card card-pad">
-                <h3>{title}</h3>
+                <div className="kicker">{title}</div>
                 <p>{text}</p>
               </article>
             ))}
@@ -206,18 +188,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="portfolio">
         <div className="container">
           <SectionTitle
             eyebrow="Nivel 6"
             title="Portfolio"
-            description="No parece CV. Parece documental."
+            description="No parece CV. Parece documental. Marketing, desarrollo, automatización y creatividad en una sola superficie."
           />
           <PortfolioExplorer items={PORTFOLIO} />
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="empresa">
         <div className="container">
           <SectionTitle
             eyebrow="Nivel 7"
@@ -239,94 +221,40 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="fases">
         <div className="container">
           <SectionTitle
             eyebrow="Nivel 8"
             title="Fases"
             description="15 fases para construir, lanzar y sostener el sistema."
           />
-          <div className="grid-3 section-grid">
-            {PHASES.slice(0, 6).map((phase) => (
-              <article key={phase.number} className="card card-pad">
-                <div className="kicker">Fase {phase.number}</div>
-                <h3>{phase.title}</h3>
-                <p>{phase.summary}</p>
-              </article>
-            ))}
-          </div>
+          <PhaseTimeline limit={6} />
           <div className="section-spacer" />
           <Link href="/fases" className="button button-secondary">Abrir mapa completo</Link>
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="contacto">
         <div className="container">
           <SectionTitle
             eyebrow="Nivel 9"
             title="Contacto"
-            description="Un asistente comercial, no un formulario simple."
+            description="REVIA convierte el interés en conversación, seguimiento y cierre."
           />
-          <div className="grid-2 section-grid">
-            <article className="card card-pad">
-              <h3>REVIA</h3>
-              <p>Pregunta, perfila, ordena y manda a CRM, correo, WhatsApp y seguimiento.</p>
-            </article>
-            <article className="card card-pad">
-              <h3>Pipeline</h3>
-              <p>El contacto se convierte en oportunidad con una ruta clara de cierre.</p>
-            </article>
-          </div>
-          <div className="section-spacer" />
-          <Link href="/contacto" className="button button-primary">Pedir diagnóstico IA</Link>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <SectionTitle
-            eyebrow="Nivel 10"
-            title="Live"
-            description="Panel público: estado, servicios, APIs, cloud, uptime y roadmap."
-          />
-          <div className="grid-3 section-grid">
-            {[
-              ["Estado", "Operativo y en expansión"],
-              ["Uptime", "Visible al público"],
-              ["Roadmap", "Sincronizado con el producto"],
-            ].map(([title, text]) => (
-              <article key={title} className="card card-pad">
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </article>
-            ))}
-          </div>
-          <div className="section-spacer" />
-          <Link href="/live" className="button button-secondary">Abrir panel live</Link>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <SectionTitle
-            eyebrow="Preguntas rápidas"
-            title="Sin humo, sin vueltas"
-            description="Respuestas cortas para bajar fricción y acelerar el contacto."
-          />
-          <FaqList />
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <div className="panel panel-cta hko-final-cta">
-            <div className="kicker">Cierre</div>
-            <h2 style={{ margin: 0, fontSize: "clamp(30px, 5vw, 54px)" }}>
-              Si quieres vender mejor, automatizar más o lanzar una marca seria, aquí empieza.
-            </h2>
-            <div className="hero-actions" style={{ marginTop: 18 }}>
-              <Link href="/contacto" className="button button-primary">Hablemos</Link>
-              <Link href="/apps" className="button button-secondary">Ver apps</Link>
+          <div className="detail-layout">
+            <LeadForm />
+            <div className="card card-pad story-panel">
+              <div>
+                <div className="kicker">Ruta comercial</div>
+                <h3 style={{ fontSize: 'clamp(26px, 4vw, 40px)' }}>Atracción → Diagnóstico → Agenda → CRM → Venta</h3>
+                <p>Una sola superficie para convertir leads sin perder contexto ni velocidad.</p>
+              </div>
+              <div className="tag-row">
+                <span className="tag"><strong>Email</strong> · hocker.agi@gmail.com</span>
+                <span className="tag"><strong>WhatsApp</strong> · 663 209 1143</span>
+                <span className="tag tag-soft"><strong>Vercel</strong> · hockeragi.vercel.app</span>
+              </div>
+              <Link href="/callback" className="button button-primary button-big" style={{ width: 'fit-content' }}>Pedir callback</Link>
             </div>
           </div>
         </div>
