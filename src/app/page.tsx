@@ -8,7 +8,7 @@ import { SectionTitle } from "@/components/section-title";
 import { PhaseTimeline } from "@/components/phase-timeline";
 import { LeadForm } from "@/components/lead-form";
 import { StatusTiles } from "@/components/status-tiles";
-import { APPS, PHASES, PORTFOLIO, SERVICES, SITE } from "@/lib/site-data";
+import { APPS, PORTFOLIO, SERVICES, SITE } from "@/lib/site-data";
 
 const quickLinks = [
   { href: "#soluciones", label: "Soluciones" },
