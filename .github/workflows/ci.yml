@@ -30,7 +30,7 @@ jobs:
           cache: npm
 
       - name: Install reproducibly
-        run: npm ci --include=optional
+        run: npm ci --include=optional --fetch-retries=5 --fetch-retry-mintimeout=20000 --fetch-retry-maxtimeout=120000
 
       - name: Regression tests
         run: npm test
