@@ -28,8 +28,11 @@ jobs:
         with:
           node-version: 24
           cache: npm
+          registry-url: https://registry.npmjs.org
 
       - name: Install reproducibly
+        env:
+          NPM_CONFIG_REGISTRY: https://registry.npmjs.org
         run: npm ci --include=optional --fetch-retries=5 --fetch-retry-mintimeout=20000 --fetch-retry-maxtimeout=120000
 
       - name: Regression tests
@@ -45,4 +48,6 @@ jobs:
         run: npm run build
 
       - name: Production dependency audit
+        env:
+          NPM_CONFIG_REGISTRY: https://registry.npmjs.org
         run: npm audit --omit=dev --audit-level=high
