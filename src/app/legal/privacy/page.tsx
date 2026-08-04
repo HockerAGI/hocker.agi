@@ -46,7 +46,7 @@ export default function PrivacyPage() {
             </p>
           </section>
 
-          <section>
+          <section id="cookies">
             <h2>5. Cookies y medición</h2>
             <p>
               El sitio puede usar almacenamiento local para recordar preferencias. Google Analytics y Meta Pixel solo se cargan después de que el usuario acepta la medición opcional. Rechazarla no limita el acceso al sitio ni al formulario.
