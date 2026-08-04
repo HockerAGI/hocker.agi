@@ -1,48 +1,52 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { LeadForm } from "@/components/lead-form";
-import { SectionTitle } from "@/components/section-title";
-import { CONTACT } from "@/lib/site-data";
+import { PUBLIC_SITE } from "@/lib/public-site";
 
 export const metadata: Metadata = {
-  title: "Contacto",
-  description: "Contacto comercial de Hocker AGI Technologies.",
+  title: "Contacto y diagnóstico comercial",
+  description: "Solicita un diagnóstico de automatización, marketing, software o inteligencia artificial para tu empresa.",
+  alternates: { canonical: "/contacto" },
 };
 
 export default function ContactPage() {
+  const whatsapp = `${PUBLIC_SITE.whatsapp}?text=${encodeURIComponent(
+    "Hola, quiero solicitar un diagnóstico para mi empresa."
+  )}`;
+
   return (
-    <div>
-      <section className="page-hero">
-        <div className="container">
-          <div className="panel hero-panel">
-            <div className="kicker">Contacto</div>
-            <h1 className="hero-title">Hablemos de tu siguiente venta.</h1>
-            <p className="hero-text">Cuéntanos qué necesitas y te respondemos por WhatsApp o email con una ruta concreta.</p>
-            <div className="hero-actions">
-              <a href={CONTACT.whatsapp} className="button button-primary button-big" target="_blank" rel="noreferrer">WhatsApp</a>
-              <a href={`mailto:${CONTACT.email}`} className="button button-secondary button-big">Email</a>
-              <Link href="/callback" className="button button-secondary button-big">Pedir callback</Link>
+    <>
+      <section className="page-hero commercial-page-hero">
+        <div className="container narrow-container">
+          <p className="eyebrow">CONTACTO</p>
+          <h1 className="hero-title">Convirtamos una necesidad en un plan concreto.</h1>
+          <p className="hero-text">
+            Comparte el objetivo, el proceso que quieres mejorar y el canal por el que prefieres recibir respuesta. Te diremos qué conviene construir, automatizar o descartar.
+          </p>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container conversion-grid">
+          <div className="conversion-copy">
+            <p className="eyebrow">RESPUESTA COMERCIAL</p>
+            <h2>Sin formularios eternos ni propuestas genéricas.</h2>
+            <p>
+              Revisamos el contexto y continuamos la conversación por WhatsApp o correo. El diagnóstico inicial no implica contratación.
+            </p>
+            <div className="contact-direct">
+              <a href={whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp: {PUBLIC_SITE.phoneDisplay}</a>
+              <a href={`mailto:${PUBLIC_SITE.email}`}>{PUBLIC_SITE.email}</a>
             </div>
+            <ul className="trust-list contact-trust-list">
+              <li>Objetivo y alcance claros</li>
+              <li>Ruta técnica explicada</li>
+              <li>Indicadores definidos</li>
+              <li>Privacidad y control</li>
+            </ul>
           </div>
+          <LeadForm />
         </div>
       </section>
-
-      <section className="section">
-        <div className="container">
-          <SectionTitle eyebrow="Formulario" title="Escribe y abre el canal correcto" description="Sin formularios infinitos ni procesos raros: directo a la conversación." />
-          <LeadForm mode="contact" />
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <div className="grid-3 section-grid">
-            <article className="card card-pad service-card"><h3>Email</h3><p>{CONTACT.email}</p></article>
-            <article className="card card-pad service-card"><h3>WhatsApp</h3><p>{CONTACT.whatsappPhone}</p></article>
-            <article className="card card-pad service-card"><h3>Respuesta</h3><p>Directa y sin vueltas.</p></article>
-          </div>
-        </div>
-      </section>
-    </div>
+    </>
   );
 }
