@@ -31,7 +31,7 @@ jobs:
         run: |
           npm install --save-exact react@19.2.8 react-dom@19.2.8
           npm install --save-dev --save-exact postcss@8.5.23
-          npm pkg set overrides.postcss=8.5.23
+          npm pkg set 'overrides.postcss=$postcss'
           npm install --package-lock-only
           npm ci --include=optional
           npm dedupe
