@@ -8,13 +8,6 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
-const availability: Record<string, string> = {
-  live: "Disponible para evaluación",
-  building: "Implementación bajo alcance",
-  blocked: "Próxima apertura",
-  protected: "Información bajo solicitud",
-};
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const app = APPS.find((item) => item.slug === slug);
@@ -46,7 +39,7 @@ export default async function AppDetailPage({ params }: PageProps) {
             <p className="hero-text">{app.summary}</p>
             <div className="product-public-tags">
               <span>{app.audience}</span>
-              <span>{availability[app.status] || "Bajo solicitud"}</span>
+              <span>{app.availability}</span>
             </div>
             <div className="hero-actions">
               <Link href="/contacto" className="button button-primary button-big">Solicitar evaluación</Link>
