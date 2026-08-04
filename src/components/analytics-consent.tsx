@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 const STORAGE_KEY = "hocker.analytics-consent.v1";
 
 type Consent = "accepted" | "rejected" | null;
+type MetaPixel = ((...args: unknown[]) => void) & { queue: unknown[][] };
 
 function loadScript(id: string, src: string) {
   if (document.getElementById(id)) return;
@@ -30,15 +31,16 @@ function enableAnalytics() {
   }
 
   if (pixelId) {
-    const win = window as typeof window & { fbq?: ((...args: unknown[]) => void) & { queue?: unknown[] } };
+    const win = window as typeof window & { fbq?: MetaPixel };
     if (!win.fbq) {
-      const fbq = ((...args: unknown[]) => fbq.queue?.push(args)) as typeof win.fbq;
-      if (fbq) fbq.queue = [];
+      const queue: unknown[][] = [];
+      const fbq = ((...args: unknown[]) => queue.push(args)) as MetaPixel;
+      fbq.queue = queue;
       win.fbq = fbq;
     }
     loadScript("hocker-meta-pixel", "https://connect.facebook.net/en_US/fbevents.js");
-    win.fbq?.("init", pixelId);
-    win.fbq?.("track", "PageView");
+    win.fbq("init", pixelId);
+    win.fbq("track", "PageView");
   }
 }
 
