@@ -6,7 +6,7 @@ import { PUBLIC_NAV, PUBLIC_SITE } from "@/lib/public-site";
 const dockItems = [
   { href: "/", label: "Inicio" },
   { href: "/soluciones", label: "Soluciones" },
-  { href: "/portfolio", label: "Casos" },
+  { href: "/apps", label: "Productos" },
   { href: "/contacto", label: "Contacto" },
 ] as const;
 
@@ -26,10 +26,11 @@ export function SiteShell({ children }: { children: ReactNode }) {
             <span className="brand-logo-wrap">
               <Image
                 className="brand-logo"
-                src={PUBLIC_SITE.logo}
-                alt="Logotipo de Hocker AGI Technologies"
+                src={PUBLIC_SITE.symbol}
+                alt="Isotipo de Hocker AGI Technologies"
                 width={96}
                 height={96}
+                sizes="(max-width: 720px) 52px, 64px"
                 priority
               />
             </span>
@@ -58,7 +59,14 @@ export function SiteShell({ children }: { children: ReactNode }) {
         <div className="container">
           <div className="footer-grid">
             <div className="footer-brand">
-              <Image src={PUBLIC_SITE.logo} alt="Hocker AGI Technologies" width={96} height={96} className="footer-logo" />
+              <Image
+                src={PUBLIC_SITE.logo}
+                alt="Hocker AGI Technologies"
+                width={1800}
+                height={650}
+                sizes="(max-width: 720px) 240px, 300px"
+                className="footer-logo footer-logo-horizontal"
+              />
               <div>
                 <h2>{PUBLIC_SITE.brand}</h2>
                 <p>{PUBLIC_SITE.description}</p>

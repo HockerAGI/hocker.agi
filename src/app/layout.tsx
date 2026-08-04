@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     url: PUBLIC_SITE.url,
     siteName: PUBLIC_SITE.brand,
     locale: PUBLIC_SITE.locale,
-    images: [{ url: PUBLIC_SITE.ogImage, width: 1200, height: 630, alt: PUBLIC_SITE.brand }],
+    images: [{ url: PUBLIC_SITE.ogImage, width: 1600, height: 900, alt: PUBLIC_SITE.brand }],
     type: "website",
   },
   twitter: {
@@ -68,7 +68,7 @@ const organizationSchema = {
   name: PUBLIC_SITE.brand,
   legalName: PUBLIC_SITE.legalName,
   url: PUBLIC_SITE.url,
-  logo: `${PUBLIC_SITE.url}${PUBLIC_SITE.logo}`,
+  logo: `${PUBLIC_SITE.url}${PUBLIC_SITE.symbol}`,
   image: `${PUBLIC_SITE.url}${PUBLIC_SITE.ogImage}`,
   description: PUBLIC_SITE.description,
   email: PUBLIC_SITE.email,

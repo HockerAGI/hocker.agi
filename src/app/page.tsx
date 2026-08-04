@@ -63,11 +63,12 @@ export default function HomePage() {
           <div className="brand-stage" aria-label="Identidad de Hocker AGI Technologies">
             <div className="brand-stage-glow" />
             <Image
-              src={PUBLIC_SITE.logo}
-              alt="Logotipo oficial de Hocker AGI Technologies"
-              width={1120}
-              height={1120}
-              className="brand-stage-logo"
+              src={PUBLIC_SITE.heroImage}
+              alt="Hocker AGI Technologies: inteligencia artificial, automatización, marketing y software"
+              width={1600}
+              height={900}
+              sizes="(max-width: 900px) 100vw, 52vw"
+              className="brand-stage-logo brand-stage-hero"
               priority
             />
             <div className="brand-stage-note">
@@ -140,10 +141,10 @@ export default function HomePage() {
             </div>
             <p>Cada producto resuelve un frente específico y puede conectarse con los demás sin exponer la operación interna.</p>
           </div>
-          <div className="product-grid">
+          <div className="product-grid product-grid-expanded">
             {PUBLIC_PRODUCTS.map((product) => (
               <article className="product-card" key={product.title}>
-                <Image src={product.image} alt={`Logotipo de ${product.title}`} width={160} height={160} className="product-logo" />
+                <Image src={product.image} alt={`Icono oficial de ${product.title}`} width={160} height={160} className="product-logo" />
                 <div>
                   <span>{product.label}</span>
                   <h3>{product.title}</h3>
@@ -154,7 +155,7 @@ export default function HomePage() {
             ))}
           </div>
           <div className="section-actions">
-            <Link href="/apps" className="button button-secondary">Explorar productos</Link>
+            <Link href="/apps" className="button button-secondary">Explorar todos los productos</Link>
             <Link href="/ecosistema" className="button button-secondary">Conocer la tecnología</Link>
           </div>
         </div>

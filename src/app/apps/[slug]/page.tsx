@@ -19,7 +19,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: app.title,
       description: app.summary,
-      images: [{ url: app.cover, alt: app.title }],
+      images: [{ url: app.ogImage, width: 1200, height: 630, alt: app.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: app.title,
+      description: app.summary,
+      images: [app.ogImage],
     },
   };
 }
@@ -49,9 +55,10 @@ export default async function AppDetailPage({ params }: PageProps) {
           <div className="product-cover-wrap">
             <Image
               src={app.cover}
-              alt={`Vista conceptual de ${app.title}`}
-              width={760}
-              height={560}
+              alt={`Identidad y propuesta de ${app.title}`}
+              width={1600}
+              height={900}
+              sizes="(max-width: 900px) 100vw, 52vw"
               className="hero-cover product-detail-cover"
               priority
             />

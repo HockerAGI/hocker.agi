@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/><stop offset="0.18" stop-color="#64748b"/>
+      <stop offset="0.52" stop-color="#0f172a"/><stop offset="0.82" stop-color="#475569"/><stop offset="1" stop-color="#020617"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff8a1f"/><stop offset="1" stop-color="#475569"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#38bdf8"/><stop offset="0.55" stop-color="#0878d8"/><stop offset="1" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <radialGradient id="glow"><stop offset="0" stop-color="#ff8a1f" stop-opacity=".42"/><stop offset="1" stop-color="#ff8a1f" stop-opacity="0"/></radialGradient>
+    <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#000" flood-opacity=".62"/></filter>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="24"/></filter>
+  </defs><circle cx="256" cy="256" r="210" fill="url(#glow)" opacity=".4"/><g filter="url(#shadow)"><path d="M122 124l126-54 98 45v114l-98 47-126-55z" fill="url(#metal)" stroke="#64748b" stroke-width="8"/><path d="M122 221l126 55v166l-126-61z" fill="#172033" stroke="#64748b" stroke-width="8"/><path d="M248 276l98-47v151l-98 62z" fill="#0f172a" stroke="#64748b" stroke-width="8"/><path d="M171 149h67v80h38v-80h70v231h-70v-84h-38v84h-67z" fill="url(#metal)" opacity=".94"/><path d="M251 67l91-39-39 63z" fill="#ff8a1f" stroke="#ffbd73" stroke-width="6"/><path d="M326 337v75" stroke="#ff8a1f" stroke-width="5" stroke-dasharray="10 9"/></g></svg>
