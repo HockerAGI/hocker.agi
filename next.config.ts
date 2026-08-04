@@ -39,6 +39,7 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/callback", destination: "/contacto", permanent: true },
+      { source: "/login", destination: "/contacto", permanent: true },
       { source: "/fases", destination: "/empresa", permanent: true },
       { source: "/live", destination: "/empresa", permanent: true },
       { source: "/status", destination: "/empresa", permanent: true },
