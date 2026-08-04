@@ -10,6 +10,14 @@ on:
       - scripts/generate-site-icons.mjs
       - scripts/clean-legacy-brand-assets.mjs
       - .github/workflows/generate-brand-assets.yml
+  pull_request:
+    branches:
+      - main
+    paths:
+      - scripts/generate-brand-assets.mjs
+      - scripts/generate-site-icons.mjs
+      - scripts/clean-legacy-brand-assets.mjs
+      - .github/workflows/generate-brand-assets.yml
 
 permissions:
   contents: write
