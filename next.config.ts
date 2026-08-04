@@ -43,6 +43,7 @@ const nextConfig: NextConfig = {
       { source: "/fases", destination: "/empresa", permanent: true },
       { source: "/live", destination: "/empresa", permanent: true },
       { source: "/status", destination: "/empresa", permanent: true },
+      { source: "/apps/nexpa-app", destination: "/apps/nexpa", permanent: true },
     ];
   },
   async headers() {
