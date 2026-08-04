@@ -1,19 +1,32 @@
 import type { MetadataRoute } from "next";
+import { PUBLIC_SITE } from "@/lib/public-site";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Hocker AGI Technologies",
-    short_name: "Hocker",
-    description: "Ecosistema de IA, marketing y software.",
-    start_url: "/",
+    id: "/",
+    name: PUBLIC_SITE.brand,
+    short_name: "Hocker AGI",
+    description: PUBLIC_SITE.description,
+    start_url: "/?source=pwa",
+    scope: "/",
     display: "standalone",
-    background_color: "#03050b",
-    theme_color: "#0b1120",
+    orientation: "portrait-primary",
+    background_color: "#01040a",
+    theme_color: "#07101d",
+    categories: ["business", "productivity", "marketing"],
+    lang: "es-MX",
     icons: [
       {
-        src: "/brand/hocker-agi-technologies.png",
-        sizes: "512x512",
+        src: "/icon.png",
+        sizes: "1536x1536",
         type: "image/png",
+        purpose: "any",
+      },
+      {
+        src: "/apple-icon.png",
+        sizes: "1536x1536",
+        type: "image/png",
+        purpose: "maskable",
       },
     ],
   };

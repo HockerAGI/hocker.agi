@@ -1,0 +1,156 @@
+.narrow-container { max-width: 980px; }
+.commercial-page-hero {
+  position: relative;
+  padding: clamp(78px, 10vw, 138px) 0 clamp(46px, 6vw, 82px);
+  overflow: hidden;
+  border-bottom: 1px solid rgba(125, 179, 255, .09);
+  background:
+    radial-gradient(circle at 75% 10%, rgba(55, 139, 255, .18), transparent 30rem),
+    linear-gradient(180deg, rgba(6, 13, 25, .66), rgba(2, 6, 13, .22));
+}
+.commercial-page-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(110,170,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(110,170,255,.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(180deg, #000, transparent 92%);
+}
+.commercial-page-hero .container { position: relative; }
+.commercial-page-hero .hero-title { font-size: clamp(48px, 7vw, 88px); line-height: .96; max-width: 950px; }
+.commercial-page-hero .hero-text { max-width: 70ch; }
+
+.funnel-grid,
+.capability-grid,
+.principle-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border: 1px solid var(--commercial-line);
+  border-radius: 28px;
+  overflow: hidden;
+}
+.funnel-grid article,
+.principle-grid article {
+  min-height: 285px;
+  padding: 28px;
+  border-right: 1px solid var(--commercial-line);
+  background: rgba(6, 13, 24, .65);
+}
+.funnel-grid article:last-child,
+.principle-grid article:last-child { border-right: 0; }
+.funnel-grid span { display: block; color: #4ec1ff; font-size: 11px; font-weight: 850; letter-spacing: .15em; text-transform: uppercase; }
+.funnel-grid h3,
+.principle-grid h3 { margin: 64px 0 14px; font-size: 25px; line-height: 1.08; letter-spacing: -.035em; }
+.funnel-grid p,
+.principle-grid p { color: #8fa2b8; line-height: 1.68; }
+
+.capability-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.capability-grid article {
+  min-height: 310px;
+  padding: 30px;
+  border-right: 1px solid var(--commercial-line);
+  border-bottom: 1px solid var(--commercial-line);
+  background: rgba(6, 13, 24, .64);
+}
+.capability-grid article:nth-child(3n) { border-right: 0; }
+.capability-grid article:nth-last-child(-n+3) { border-bottom: 0; }
+.capability-grid span { color: #4ec1ff; font-size: 11px; letter-spacing: .16em; }
+.capability-grid h3 { margin: 58px 0 14px; font-size: 28px; letter-spacing: -.04em; }
+.capability-grid p { color: #8fa2b8; line-height: 1.67; }
+.capability-grid strong { display: block; margin-top: 22px; color: #d9e8f7; font-size: 13px; }
+
+.architecture-stack { display: grid; border-top: 1px solid var(--commercial-line); }
+.architecture-stack article {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--commercial-line);
+}
+.architecture-stack > article > span { color: #45baff; font-size: 12px; letter-spacing: .16em; }
+.architecture-stack h3 { margin: 0 0 8px; font-size: 29px; letter-spacing: -.035em; }
+.architecture-stack p { max-width: 72ch; margin: 0; color: #91a4b9; line-height: 1.7; }
+
+.proposal-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 40px;
+  align-items: center;
+  padding: clamp(30px, 5vw, 58px);
+  border: 1px solid rgba(87, 169, 255, .22);
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(40, 144, 255, .2), transparent 25rem),
+    rgba(6, 13, 25, .76);
+}
+.proposal-panel h2 { margin: 0; font-size: clamp(34px, 4.8vw, 62px); line-height: 1.02; letter-spacing: -.05em; }
+.proposal-panel p:last-child { max-width: 66ch; color: #91a4b9; line-height: 1.68; }
+
+.company-capability-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.company-capability-row span { padding: 13px 16px; border: 1px solid var(--commercial-line); border-radius: 999px; color: #dbe9f8; background: rgba(255,255,255,.035); }
+
+.legal-page h1 { margin: 0; font-size: clamp(48px, 7vw, 82px); line-height: .98; letter-spacing: -.055em; }
+.legal-updated { margin: 16px 0 48px; color: #72869d; }
+.legal-content { display: grid; gap: 0; border-top: 1px solid var(--commercial-line); }
+.legal-content section { display: grid; grid-template-columns: minmax(220px, .42fr) minmax(0, 1fr); gap: 44px; padding: 28px 0; border-bottom: 1px solid var(--commercial-line); }
+.legal-content h2 { margin: 0; font-size: 19px; }
+.legal-content p { max-width: 78ch; margin: 0; color: #91a4b9; line-height: 1.76; }
+.legal-content a { color: #65c8ff; text-decoration: underline; }
+.contact-trust-list { margin-top: 34px; }
+
+.product-detail-layout {
+  grid-template-columns: minmax(0, .95fr) minmax(360px, 1.05fr);
+  gap: clamp(38px, 7vw, 92px);
+  align-items: center;
+}
+.product-public-tags { display: flex; flex-wrap: wrap; gap: 9px; margin: 24px 0 0; }
+.product-public-tags span { padding: 10px 13px; border: 1px solid var(--commercial-line); border-radius: 999px; color: #b9c9da; background: rgba(255,255,255,.035); font-size: 12px; }
+.product-cover-wrap { position: relative; padding: 18px; border: 1px solid rgba(95, 170, 255, .2); border-radius: 32px; background: radial-gradient(circle at 50% 0%, rgba(54, 149, 255, .19), transparent 60%), rgba(3, 8, 16, .78); box-shadow: 0 38px 90px rgba(0,0,0,.42); }
+.product-detail-cover { display: block; width: 100%; height: auto; aspect-ratio: 1.35 / 1; object-fit: cover; border-radius: 22px; }
+.product-benefit-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--commercial-line); border-radius: 28px; overflow: hidden; }
+.product-benefit-grid article { min-height: 280px; padding: 30px; border-right: 1px solid var(--commercial-line); background: rgba(7, 14, 25, .65); }
+.product-benefit-grid article:last-child { border-right: 0; }
+.product-benefit-grid span { color: #4ec1ff; font-size: 11px; letter-spacing: .16em; }
+.product-benefit-grid h3 { margin: 58px 0 14px; font-size: 27px; letter-spacing: -.035em; }
+.product-benefit-grid p { color: #8fa2b8; line-height: 1.68; }
+.product-fit-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(44px, 8vw, 118px); align-items: start; }
+.product-fit-grid h2 { margin: 0; font-size: clamp(39px, 5vw, 66px); line-height: 1.02; letter-spacing: -.05em; }
+.product-fit-grid h3 { margin: 0 0 8px; font-size: 23px; }
+.product-fit-grid h3:not(:first-child) { margin-top: 30px; }
+.product-fit-grid p { color: #91a4b9; line-height: 1.72; }
+
+@media (max-width: 1000px) {
+  .funnel-grid, .principle-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .funnel-grid article:nth-child(2), .principle-grid article:nth-child(2) { border-right: 0; }
+  .funnel-grid article:nth-child(-n+2), .principle-grid article:nth-child(-n+2) { border-bottom: 1px solid var(--commercial-line); }
+  .capability-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .capability-grid article:nth-child(3n) { border-right: 1px solid var(--commercial-line); }
+  .capability-grid article:nth-child(2n) { border-right: 0; }
+  .capability-grid article:nth-last-child(-n+3) { border-bottom: 1px solid var(--commercial-line); }
+  .capability-grid article:nth-last-child(-n+2) { border-bottom: 0; }
+  .proposal-panel { grid-template-columns: 1fr; }
+  .product-detail-layout, .product-fit-grid { grid-template-columns: 1fr; }
+  .product-benefit-grid { grid-template-columns: 1fr; }
+  .product-benefit-grid article { min-height: 230px; border-right: 0; border-bottom: 1px solid var(--commercial-line); }
+  .product-benefit-grid article:last-child { border-bottom: 0; }
+}
+
+@media (max-width: 680px) {
+  .commercial-page-hero .hero-title { font-size: clamp(43px, 14vw, 66px); }
+  .funnel-grid, .capability-grid, .principle-grid { grid-template-columns: 1fr; }
+  .funnel-grid article, .principle-grid article,
+  .funnel-grid article:nth-child(2), .principle-grid article:nth-child(2),
+  .capability-grid article, .capability-grid article:nth-child(2n), .capability-grid article:nth-child(3n),
+  .capability-grid article:nth-last-child(-n+2), .capability-grid article:nth-last-child(-n+3) {
+    min-height: 250px;
+    border-right: 0;
+    border-bottom: 1px solid var(--commercial-line);
+  }
+  .funnel-grid article:last-child, .principle-grid article:last-child, .capability-grid article:last-child { border-bottom: 0; }
+  .funnel-grid h3, .principle-grid h3, .capability-grid h3 { margin-top: 42px; }
+  .architecture-stack article { grid-template-columns: 52px 1fr; gap: 16px; }
+  .legal-content section { grid-template-columns: 1fr; gap: 12px; }
+  .product-cover-wrap { padding: 10px; border-radius: 24px; }
+  .product-detail-cover { border-radius: 17px; }
+}

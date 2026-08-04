@@ -7,14 +7,14 @@ import type { AppItem, AppGroup } from "@/lib/site-data";
 
 const FILTERS: { key: AppGroup | "all"; label: string }[] = [
   { key: "all", label: "Todas" },
-  { key: "control", label: "Control" },
+  { key: "control", label: "Operación" },
   { key: "marketing", label: "Marketing" },
-  { key: "wallet", label: "Wallet" },
+  { key: "wallet", label: "Finanzas" },
   { key: "crm", label: "CRM" },
   { key: "cloud", label: "Cloud" },
   { key: "security", label: "Seguridad" },
-  { key: "entertainment", label: "Gaming" },
-  { key: "operations", label: "Ops" },
+  { key: "entertainment", label: "Entretenimiento" },
+  { key: "operations", label: "Procesos" },
 ];
 
 export function AppExplorer({ apps }: { apps: AppItem[] }) {
@@ -24,10 +24,10 @@ export function AppExplorer({ apps }: { apps: AppItem[] }) {
   const filtered = useMemo(() => {
     const search = query.trim().toLowerCase();
     return apps.filter((app) => {
-      const groupOk = active === "all" ? true : app.group === active;
+      const groupOk = active === "all" || app.group === active;
       const searchOk =
         search.length === 0 ||
-        [app.title, app.short, app.tagline, app.summary, app.audience, ...app.highlights, ...app.agis]
+        [app.title, app.short, app.tagline, app.summary, app.audience, app.availability, ...app.highlights]
           .join(" ")
           .toLowerCase()
           .includes(search);
@@ -41,12 +41,12 @@ export function AppExplorer({ apps }: { apps: AppItem[] }) {
         <input
           className="search-input"
           type="search"
-          placeholder="Buscar app, función o AGI"
+          placeholder="Buscar producto o función"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          aria-label="Buscar aplicaciones"
+          aria-label="Buscar productos"
         />
-        <div className="filters" role="tablist" aria-label="Filtros de aplicaciones">
+        <div className="filters" aria-label="Filtrar productos">
           {FILTERS.map((filter) => (
             <button
               key={filter.key}
@@ -65,29 +65,27 @@ export function AppExplorer({ apps }: { apps: AppItem[] }) {
         {filtered.map((app) => (
           <article key={app.slug} className="card card-pad app-card">
             <div className="app-top">
-              <Image src={app.logo} alt={app.title} width={88} height={88} className="app-logo" />
+              <Image src={app.logo} alt={`Logotipo de ${app.title}`} width={88} height={88} className="app-logo" />
               <div className="app-title">
+                <span>{app.badge}</span>
                 <strong>{app.title}</strong>
-                <span>{app.tagline}</span>
+                <small>{app.availability}</small>
               </div>
             </div>
+            <h3>{app.tagline}</h3>
             <p>{app.summary}</p>
-            <p className="small-strong"><strong>Ideal para:</strong> {app.audience}</p>
+            <p className="small-strong"><strong>Diseñado para:</strong> {app.audience}</p>
             <div className="tag-row">
-              <span className="tag"><strong>{app.badge}</strong></span>
-              <span className="tag">{app.status}</span>
-            </div>
-            <div className="tag-row">
-              {app.highlights.map((item) => (
-                <span key={item} className="tag tag-soft">{item}</span>
-              ))}
+              {app.highlights.map((item) => <span key={item} className="tag tag-soft">{item}</span>)}
             </div>
             <Link href={`/apps/${app.slug}`} className="button button-secondary button-inline">
-              Abrir módulo
+              Conocer solución
             </Link>
           </article>
         ))}
       </div>
+
+      {filtered.length === 0 ? <p className="empty-state">No encontramos productos con ese criterio.</p> : null}
     </div>
   );
 }

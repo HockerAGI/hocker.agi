@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { PUBLIC_SITE } from "@/lib/public-site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -6,9 +7,17 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/login", "/api/"],
+        disallow: [
+          "/api/",
+          "/login",
+          "/status",
+          "/live",
+          "/fases",
+          "/callback",
+        ],
       },
     ],
-    sitemap: "https://hockeragi.vercel.app/sitemap.xml",
+    sitemap: `${PUBLIC_SITE.url}/sitemap.xml`,
+    host: PUBLIC_SITE.url,
   };
 }

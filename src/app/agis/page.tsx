@@ -1,51 +1,70 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { AgiGrid } from "@/components/agi-grid";
-import { SectionTitle } from "@/components/section-title";
 
 export const metadata: Metadata = {
-  title: "AGIs",
-  description: "NOVA y las AGIs del ecosistema Hocker, explicadas de forma simple.",
+  title: "Agentes especializados de inteligencia artificial",
+  description: "Conoce cómo Hocker AGI organiza agentes especializados para marketing, automatización, análisis, seguridad y operación.",
+  alternates: { canonical: "/agis" },
 };
+
+const capabilities = [
+  { title: "Orquestación", text: "Coordina solicitudes, contexto, reglas y prioridades para que cada flujo tenga una salida consistente.", benefit: "Menos tareas sueltas y mayor continuidad." },
+  { title: "Marketing y contenido", text: "Apoya investigación, planeación, variantes creativas, copies, reporting y aprendizaje de campañas.", benefit: "Producción más rápida con control de marca." },
+  { title: "Ventas y seguimiento", text: "Califica solicitudes, prepara contexto y activa tareas de seguimiento sin sustituir decisiones comerciales críticas.", benefit: "Menor tiempo de respuesta y mejor trazabilidad." },
+  { title: "Análisis y finanzas", text: "Consolida indicadores, detecta desviaciones y presenta información útil para priorizar acciones.", benefit: "Decisiones basadas en datos verificables." },
+  { title: "Infraestructura y seguridad", text: "Supervisa integraciones, permisos, registros, disponibilidad y cumplimiento de reglas técnicas.", benefit: "Operación más controlada y auditable." },
+  { title: "Conocimiento y memoria", text: "Organiza documentos y contexto autorizado para evitar comenzar desde cero en cada interacción.", benefit: "Respuestas coherentes y aprendizaje operativo." },
+] as const;
 
 export default function AgisPage() {
   return (
-    <div>
-      <section className="page-hero">
-        <div className="container">
-          <div className="panel hero-panel">
-            <div className="kicker">AGIs</div>
-            <h1 className="hero-title">
-              NOVA dirige. Las demás AGIs hacen el trabajo fino.
-            </h1>
-            <p className="hero-text">Cada una resuelve una función clara: estrategia, marketing, seguridad, legal, finanzas o infraestructura.</p>
-            <div className="hero-actions">
-              <Link href="/contacto" className="button button-primary button-big">Hablar del ecosistema</Link>
-              <Link href="/apps" className="button button-secondary button-big">Ver apps</Link>
-            </div>
+    <>
+      <section className="page-hero commercial-page-hero">
+        <div className="container narrow-container">
+          <p className="eyebrow">AGENTES ESPECIALIZADOS</p>
+          <h1 className="hero-title">Una arquitectura de IA por funciones, no un chatbot para todo.</h1>
+          <p className="hero-text">
+            Distribuimos tareas entre capacidades especializadas y mantenemos reglas de aprobación humana para acciones sensibles, financieras o legales.
+          </p>
+          <div className="hero-actions">
+            <Link href="/contacto" className="button button-primary button-big">Evaluar un caso de uso</Link>
+            <Link href="/ecosistema" className="button button-secondary button-big">Conocer la arquitectura</Link>
           </div>
         </div>
       </section>
 
       <section className="section">
         <div className="container">
-          <SectionTitle eyebrow="Mapa real" title="16 AGIs con función concreta" description="No son nombres decorativos; son piezas del sistema con rol y trabajo definidos." />
-          <AgiGrid />
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <div className="panel panel-cta">
-            <div className="kicker">Valor</div>
-            <h2>Más orden, más claridad, más velocidad para vender y operar.</h2>
-            <div className="hero-actions">
-              <Link href="/ecosistema" className="button button-primary button-big">Ver ecosistema</Link>
-              <Link href="/soluciones" className="button button-secondary button-big">Ver soluciones</Link>
+          <div className="section-head split-head">
+            <div>
+              <p className="eyebrow">CAPACIDADES PÚBLICAS</p>
+              <h2>Especialización donde realmente aporta.</h2>
             </div>
+            <p>La composición de agentes, modelos e integraciones se define según el proyecto. La información sensible de infraestructura no se expone en el sitio público.</p>
+          </div>
+          <div className="capability-grid">
+            {capabilities.map((item, index) => (
+              <article key={item.title}>
+                <span>0{index + 1}</span>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+                <strong>{item.benefit}</strong>
+              </article>
+            ))}
           </div>
         </div>
       </section>
-    </div>
+
+      <section className="section section-contrast">
+        <div className="container proposal-panel">
+          <div>
+            <p className="eyebrow">CONTROL Y GOBERNANZA</p>
+            <h2>La autonomía se limita por reglas, permisos y evidencia.</h2>
+            <p>Las acciones críticas requieren validación, trazabilidad y un responsable definido. Automatizar no significa perder el control.</p>
+          </div>
+          <Link href="/contacto" className="button button-primary button-big">Solicitar diagnóstico</Link>
+        </div>
+      </section>
+    </>
   );
 }

@@ -9,11 +9,11 @@ const securityHeaders = [
       "object-src 'none'",
       "frame-ancestors 'none'",
       "form-action 'self' mailto:",
-      "script-src 'self' 'unsafe-inline'",
+      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net",
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: blob:",
+      "img-src 'self' data: blob: https://www.facebook.com",
       "font-src 'self' data:",
-      "connect-src 'self'",
+      "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://graph.facebook.com",
       "manifest-src 'self'",
       "upgrade-insecure-requests",
     ].join("; "),
@@ -24,6 +24,7 @@ const securityHeaders = [
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=()" },
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
   { key: "Cross-Origin-Resource-Policy", value: "same-site" },
+  { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
 ];
 
 const nextConfig: NextConfig = {
@@ -33,13 +34,26 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
   },
   compiler: {
-    removeConsole: process.env.NODE_ENV === "production",
+    removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error"] } : false,
+  },
+  async redirects() {
+    return [
+      { source: "/callback", destination: "/contacto", permanent: true },
+      { source: "/login", destination: "/contacto", permanent: true },
+      { source: "/fases", destination: "/empresa", permanent: true },
+      { source: "/live", destination: "/empresa", permanent: true },
+      { source: "/status", destination: "/empresa", permanent: true },
+    ];
   },
   async headers() {
     return [
       {
         source: "/(.*)",
         headers: securityHeaders,
+      },
+      {
+        source: "/api/(.*)",
+        headers: [{ key: "Cache-Control", value: "no-store" }],
       },
     ];
   },
