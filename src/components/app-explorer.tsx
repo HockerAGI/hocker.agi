@@ -17,13 +17,6 @@ const FILTERS: { key: AppGroup | "all"; label: string }[] = [
   { key: "operations", label: "Procesos" },
 ];
 
-const publicAvailability: Record<string, string> = {
-  live: "Disponible",
-  building: "En desarrollo",
-  blocked: "Próxima apertura",
-  protected: "Información bajo solicitud",
-};
-
 export function AppExplorer({ apps }: { apps: AppItem[] }) {
   const [active, setActive] = useState<AppGroup | "all">("all");
   const [query, setQuery] = useState("");
@@ -34,7 +27,7 @@ export function AppExplorer({ apps }: { apps: AppItem[] }) {
       const groupOk = active === "all" || app.group === active;
       const searchOk =
         search.length === 0 ||
-        [app.title, app.short, app.tagline, app.summary, app.audience, ...app.highlights]
+        [app.title, app.short, app.tagline, app.summary, app.audience, app.availability, ...app.highlights]
           .join(" ")
           .toLowerCase()
           .includes(search);
@@ -76,7 +69,7 @@ export function AppExplorer({ apps }: { apps: AppItem[] }) {
               <div className="app-title">
                 <span>{app.badge}</span>
                 <strong>{app.title}</strong>
-                <small>{publicAvailability[app.status] || "Bajo solicitud"}</small>
+                <small>{app.availability}</small>
               </div>
             </div>
             <h3>{app.tagline}</h3>
