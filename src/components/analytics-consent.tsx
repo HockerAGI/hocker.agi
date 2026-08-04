@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 
 const STORAGE_KEY = "hocker.analytics-consent.v1";
+const CONSENT_EVENT = `${STORAGE_KEY}:change`;
 
 type Consent = "accepted" | "rejected" | null;
 type MetaPixel = ((...args: unknown[]) => void) & { queue: unknown[][] };
@@ -46,21 +47,50 @@ function enableAnalytics() {
   }
 }
 
+function readConsent(): Consent {
+  if (typeof window === "undefined") return null;
+
+  try {
+    const stored = window.localStorage.getItem(STORAGE_KEY);
+    return stored === "accepted" || stored === "rejected" ? stored : null;
+  } catch {
+    return null;
+  }
+}
+
+function subscribeToConsent(callback: () => void) {
+  const handleStorage = (event: StorageEvent) => {
+    if (event.key === STORAGE_KEY) callback();
+  };
+  const handleConsentChange = () => callback();
+
+  window.addEventListener("storage", handleStorage);
+  window.addEventListener(CONSENT_EVENT, handleConsentChange);
+
+  return () => {
+    window.removeEventListener("storage", handleStorage);
+    window.removeEventListener(CONSENT_EVENT, handleConsentChange);
+  };
+}
+
+function subscribeToHydration() {
+  return () => undefined;
+}
+
 export function AnalyticsConsent() {
-  const [consent, setConsent] = useState<Consent>(null);
-  const [ready, setReady] = useState(false);
+  const consent = useSyncExternalStore(subscribeToConsent, readConsent, () => null);
+  const ready = useSyncExternalStore(subscribeToHydration, () => true, () => false);
 
   useEffect(() => {
-    const stored = window.localStorage.getItem(STORAGE_KEY) as Consent;
-    setConsent(stored === "accepted" || stored === "rejected" ? stored : null);
-    if (stored === "accepted") enableAnalytics();
-    setReady(true);
-  }, []);
+    if (consent === "accepted") enableAnalytics();
+  }, [consent]);
 
   const decide = (value: Exclude<Consent, null>) => {
-    window.localStorage.setItem(STORAGE_KEY, value);
-    setConsent(value);
-    if (value === "accepted") enableAnalytics();
+    try {
+      window.localStorage.setItem(STORAGE_KEY, value);
+    } finally {
+      window.dispatchEvent(new Event(CONSENT_EVENT));
+    }
   };
 
   if (!ready || consent) return null;
@@ -70,13 +100,17 @@ export function AnalyticsConsent() {
       <div>
         <strong>Medición con privacidad</strong>
         <p>
-          Usamos analítica opcional para entender el rendimiento del sitio y mejorar campañas. Puedes rechazarla sin perder funciones. Consulta el {" "}
+          Usamos analítica opcional para entender el rendimiento del sitio y mejorar campañas. Puedes rechazarla sin perder funciones. Consulta el{" "}
           <Link href="/legal/privacy">aviso de privacidad</Link>.
         </p>
       </div>
       <div className="consent-actions">
-        <button type="button" className="button button-secondary" onClick={() => decide("rejected")}>Rechazar</button>
-        <button type="button" className="button button-primary" onClick={() => decide("accepted")}>Aceptar</button>
+        <button type="button" className="button button-secondary" onClick={() => decide("rejected")}>
+          Rechazar
+        </button>
+        <button type="button" className="button button-primary" onClick={() => decide("accepted")}>
+          Aceptar
+        </button>
       </div>
     </aside>
   );
