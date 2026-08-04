@@ -39,7 +39,7 @@ for (const [pathname, text] of [
   ["/apps", "Una solución por frente de trabajo"],
   ["/apps/hocker-one", "Hocker ONE"],
   ["/apps/hocker-wallet", "subwallets"],
-  ["/apps/hocker-supply", "Manufactura"],
+  ["/apps/hocker-supply", "Hocker Supply"],
   ["/apps/nexpa", "NEXPA"],
 ]) {
   await assertPage(pathname, text);
