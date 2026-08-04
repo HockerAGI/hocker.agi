@@ -29,17 +29,17 @@ jobs:
 
       - name: Generate refreshed dependency graph
         run: |
+          npm pkg delete devDependencies.postcss
+          npm pkg set overrides.postcss=8.5.23
           npm install --save-exact react@19.2.8 react-dom@19.2.8
-          npm install --save-dev --save-exact postcss@8.5.23
-          npm pkg set 'overrides.postcss=$postcss'
           npm install --package-lock-only
           npm ci --include=optional
           npm dedupe
 
       - name: Verify installed versions
         run: |
-          npm ls next react react-dom sharp postcss --depth=0
-          npm ls next react react-dom sharp postcss --depth=0 > dependency-report.txt
+          npm ls next react react-dom sharp postcss
+          npm ls next react react-dom sharp postcss > dependency-report.txt
 
       - name: Regression tests
         run: npm test
