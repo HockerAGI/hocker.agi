@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/><stop offset="0.18" stop-color="#64748b"/>
+      <stop offset="0.52" stop-color="#0f172a"/><stop offset="0.82" stop-color="#475569"/><stop offset="1" stop-color="#020617"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#24e2e2"/><stop offset="1" stop-color="#ff4d21"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#38bdf8"/><stop offset="0.55" stop-color="#0878d8"/><stop offset="1" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <radialGradient id="glow"><stop offset="0" stop-color="#24e2e2" stop-opacity=".42"/><stop offset="1" stop-color="#24e2e2" stop-opacity="0"/></radialGradient>
+    <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#000" flood-opacity=".62"/></filter>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="24"/></filter>
+  </defs><circle cx="256" cy="256" r="210" fill="url(#glow)" opacity=".4"/><g filter="url(#shadow)"><path d="M78 286c30-106 94-161 190-161 82 0 140 39 177 116l-49 22c-24-49-63-72-116-72-61 0-108 29-141 88z" fill="#ffb000" stroke="#ffd84d" stroke-width="12"/><g fill="#23a916" stroke="#7be234" stroke-width="6"><circle cx="154" cy="150" r="42"/><circle cx="210" cy="129" r="45"/><circle cx="266" cy="143" r="42"/></g><g fill="#ef3b24" stroke="#ff775f" stroke-width="6"><circle cx="141" cy="209" r="34"/><circle cx="196" cy="191" r="32"/></g><path d="M233 197h190c18 0 31 14 31 31v131c0 20-14 34-34 34H229c-15 0-27-12-27-27V225c0-16 13-28 31-28z" fill="#129b28" stroke="#7df250" stroke-width="12"/><rect x="248" y="238" width="155" height="102" rx="15" fill="#07111a" stroke="#4cdf39" stroke-width="8"/><g fill="#ef3434"><circle cx="285" cy="289" r="22"/><circle cx="326" cy="289" r="22"/><circle cx="367" cy="289" r="22"/></g><path d="M420 180v140" stroke="#22c92d" stroke-width="16" stroke-linecap="round"/><circle cx="420" cy="164" r="25" fill="#52da25" stroke="#a4ff72" stroke-width="6"/></g></svg>
