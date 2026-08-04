@@ -36,7 +36,7 @@ await waitForServer();
 
 for (const [pathname, text] of [
   ["/", "Automatiza la operación"],
-  ["/apps", "Productos del ecosistema"],
+  ["/apps", "Una solución por frente de trabajo"],
   ["/apps/hocker-one", "Hocker ONE"],
   ["/apps/hocker-wallet", "subwallets"],
   ["/apps/hocker-supply", "Manufactura"],
@@ -57,6 +57,8 @@ for (const [pathname, type] of [
 
 const legacyNexpa = await fetch(`${baseUrl}/apps/nexpa-app`, { redirect: "manual" });
 assert.ok([307, 308].includes(legacyNexpa.status), "legacy NEXPA route should redirect permanently");
-assert.equal(legacyNexpa.headers.get("location"), "/apps/nexpa", "legacy NEXPA redirect destination");
+const redirectLocation = legacyNexpa.headers.get("location");
+assert.ok(redirectLocation, "legacy NEXPA redirect should include a Location header");
+assert.equal(new URL(redirectLocation, baseUrl).pathname, "/apps/nexpa", "legacy NEXPA redirect destination");
 
 console.log("Production smoke checks passed for pages, product routes, redirects and brand assets.");
