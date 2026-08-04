@@ -46,9 +46,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
           </nav>
 
           <div className="nav-actions">
-            <a className="nav-ghost" href={whatsappBrief} target="_blank" rel="noopener noreferrer">
-              WhatsApp
-            </a>
+            <a className="nav-ghost" href={whatsappBrief} target="_blank" rel="noopener noreferrer">WhatsApp</a>
             <Link className="nav-cta" href="/contacto">Solicitar diagnóstico</Link>
           </div>
         </div>
@@ -60,13 +58,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
         <div className="container">
           <div className="footer-grid">
             <div className="footer-brand">
-              <Image
-                src={PUBLIC_SITE.logo}
-                alt="Hocker AGI Technologies"
-                width={96}
-                height={96}
-                className="footer-logo"
-              />
+              <Image src={PUBLIC_SITE.logo} alt="Hocker AGI Technologies" width={96} height={96} className="footer-logo" />
               <div>
                 <h2>{PUBLIC_SITE.brand}</h2>
                 <p>{PUBLIC_SITE.description}</p>
@@ -102,7 +94,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
               <h3>Legal</h3>
               <p><Link href="/legal/privacy">Aviso de privacidad</Link></p>
               <p><Link href="/legal/terms">Términos y condiciones</Link></p>
-              <p><button type="button" className="footer-cookie-button" onClick={undefined}>Preferencias de cookies</button></p>
+              <p><Link href="/legal/privacy#cookies">Preferencias de cookies</Link></p>
             </div>
           </div>
 
