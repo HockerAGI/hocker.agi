@@ -1,63 +1,55 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { CONTACT, SITE } from "@/lib/site-data";
-
-const navItems = [
-  { href: "/", label: "Inicio" },
-  { href: "/soluciones", label: "Soluciones" },
-  { href: "/apps", label: "Apps" },
-  { href: "/agis", label: "AGIs" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/empresa", label: "Empresa" },
-  { href: "/live", label: "Live" },
-];
+import { PUBLIC_NAV, PUBLIC_SITE } from "@/lib/public-site";
 
 const dockItems = [
   { href: "/", label: "Inicio" },
-  { href: "/soluciones", label: "Sol" },
-  { href: "/apps", label: "Apps" },
-  { href: "/portfolio", label: "Work" },
-  { href: "/contacto", label: "Lead" },
-];
+  { href: "/soluciones", label: "Soluciones" },
+  { href: "/portfolio", label: "Casos" },
+  { href: "/contacto", label: "Contacto" },
+] as const;
 
 export function SiteShell({ children }: { children: ReactNode }) {
+  const whatsappBrief = `${PUBLIC_SITE.whatsapp}?text=${encodeURIComponent(
+    "Hola, quiero solicitar un diagnóstico para mi empresa."
+  )}`;
+
   return (
     <div className="site-shell">
       <div className="shell-orbit shell-orbit-a" />
       <div className="shell-orbit shell-orbit-b" />
+
       <header className="site-nav">
         <div className="container nav-inner">
-          <Link href="/" className="brand" aria-label={SITE.brand}>
-            <Image
-              className="brand-logo"
-              src="/brand/hocker-agi-technologies.png"
-              alt="Hocker AGI Technologies"
-              width={96}
-              height={96}
-              priority
-            />
-            <div className="brand-text">
-              <strong>{SITE.brand}</strong>
-              <span>{SITE.tagline}</span>
-            </div>
+          <Link href="/" className="brand" aria-label={`Ir al inicio de ${PUBLIC_SITE.brand}`}>
+            <span className="brand-logo-wrap">
+              <Image
+                className="brand-logo"
+                src={PUBLIC_SITE.logo}
+                alt="Logotipo de Hocker AGI Technologies"
+                width={96}
+                height={96}
+                priority
+              />
+            </span>
+            <span className="brand-text">
+              <strong>HOCKER AGI</strong>
+              <span>TECHNOLOGIES</span>
+            </span>
           </Link>
 
           <nav className="nav-links" aria-label="Navegación principal">
-            {navItems.map((item) => (
-              <Link key={item.href} href={item.href}>
-                {item.label}
-              </Link>
+            {PUBLIC_NAV.map((item) => (
+              <Link key={item.href} href={item.href}>{item.label}</Link>
             ))}
           </nav>
 
           <div className="nav-actions">
-            <a className="nav-ghost" href={CONTACT.whatsapp} target="_blank" rel="noreferrer">
+            <a className="nav-ghost" href={whatsappBrief} target="_blank" rel="noopener noreferrer">
               WhatsApp
             </a>
-            <Link className="nav-cta" href="/contacto">
-              Cotizar
-            </Link>
+            <Link className="nav-cta" href="/contacto">Solicitar diagnóstico</Link>
           </div>
         </div>
       </header>
@@ -69,57 +61,72 @@ export function SiteShell({ children }: { children: ReactNode }) {
           <div className="footer-grid">
             <div className="footer-brand">
               <Image
-                src="/brand/hocker-agi-technologies.png"
+                src={PUBLIC_SITE.logo}
                 alt="Hocker AGI Technologies"
-                width={64}
-                height={64}
-                className="brand-logo"
+                width={96}
+                height={96}
+                className="footer-logo"
               />
               <div>
-                <h4>{SITE.brand}</h4>
-                <p>{SITE.description}</p>
+                <h2>{PUBLIC_SITE.brand}</h2>
+                <p>{PUBLIC_SITE.description}</p>
+                <p className="footer-location">México · Atención remota</p>
               </div>
             </div>
+
             <div>
-              <h4>Explorar</h4>
-              <p><Link href="/empresa">Empresa</Link></p>
-              <p><Link href="/ecosistema">Ecosistema</Link></p>
-              <p><Link href="/apps">Apps</Link></p>
-              <p><Link href="/agis">AGIs</Link></p>
+              <h3>Soluciones</h3>
+              <p><Link href="/soluciones">Automatización</Link></p>
+              <p><Link href="/soluciones">Publicidad y captación</Link></p>
+              <p><Link href="/soluciones">Software a medida</Link></p>
+              <p><Link href="/apps">Productos Hocker</Link></p>
             </div>
+
             <div>
-              <h4>Convertir</h4>
-              <p><Link href="/soluciones">Soluciones</Link></p>
-              <p><Link href="/portfolio">Portfolio</Link></p>
-              <p><Link href="/fases">Fases</Link></p>
-              <p><Link href="/live">Live</Link></p>
+              <h3>Empresa</h3>
+              <p><Link href="/empresa">Quiénes somos</Link></p>
+              <p><Link href="/portfolio">Casos y capacidades</Link></p>
+              <p><Link href="/ecosistema">Tecnología</Link></p>
+              <p><Link href="/contacto">Solicitar propuesta</Link></p>
             </div>
+
             <div>
-              <h4>Contacto</h4>
-              <p><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></p>
-              <p><a href={CONTACT.whatsapp} target="_blank" rel="noreferrer">WhatsApp {CONTACT.whatsappPhone}</a></p>
-              <p><Link href="/contacto">Formulario</Link></p>
-              <p><Link href="/callback">Callback</Link></p>
+              <h3>Contacto</h3>
+              <p><a href={`mailto:${PUBLIC_SITE.email}`}>{PUBLIC_SITE.email}</a></p>
+              <p><a href={whatsappBrief} target="_blank" rel="noopener noreferrer">{PUBLIC_SITE.phoneDisplay}</a></p>
+              <p>Horario de respuesta: lunes a viernes</p>
+              <p>Proyectos en México y remoto</p>
             </div>
+
             <div>
-              <h4>Legal</h4>
-              <p><Link href="/legal/terms">Términos</Link></p>
-              <p><Link href="/legal/privacy">Privacidad</Link></p>
-              <p><Link href="/status">Status</Link></p>
+              <h3>Legal</h3>
+              <p><Link href="/legal/privacy">Aviso de privacidad</Link></p>
+              <p><Link href="/legal/terms">Términos y condiciones</Link></p>
+              <p><button type="button" className="footer-cookie-button" onClick={undefined}>Preferencias de cookies</button></p>
             </div>
           </div>
+
           <div className="footer-bottom">
-            <span>© 2026 Hocker AGI Technologies</span>
-            <span>IA · Marketing · Software · Portfolio</span>
+            <span>© 2026 {PUBLIC_SITE.brand}. Todos los derechos reservados.</span>
+            <span>IA · Automatización · Marketing · Software</span>
           </div>
         </div>
       </footer>
 
+      <a
+        className="floating-whatsapp"
+        href={whatsappBrief}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Hablar con Hocker AGI Technologies por WhatsApp"
+      >
+        <span aria-hidden="true">WA</span>
+        <strong>Hablar ahora</strong>
+      </a>
+
       <nav className="mobile-dock" aria-label="Accesos rápidos móviles">
         {dockItems.map((item) => (
-          <Link key={item.href} href={item.href} className="mobile-dock-item">
-            {item.label}
-          </Link>
+          <Link key={item.href} href={item.href} className="mobile-dock-item">{item.label}</Link>
         ))}
       </nav>
     </div>
