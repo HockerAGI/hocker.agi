@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { PUBLIC_SITE } from "@/lib/public-site";
 
 type LeadFormProps = {
@@ -11,7 +11,7 @@ type LeadFormProps = {
 type Status = "idle" | "sending" | "success" | "error";
 
 export function LeadForm({ mode = "contact" }: LeadFormProps) {
-  const startedAt = useRef(Date.now());
+  const startedAt = useRef<number | null>(null);
   const [status, setStatus] = useState<Status>("idle");
   const [feedback, setFeedback] = useState("");
   const [form, setForm] = useState({
@@ -25,6 +25,10 @@ export function LeadForm({ mode = "contact" }: LeadFormProps) {
     website: "",
     consent: false,
   });
+
+  useEffect(() => {
+    startedAt.current = Date.now();
+  }, []);
 
   const prefix = mode === "callback" ? "Solicitud de llamada" : "Diagnóstico comercial";
 
@@ -60,6 +64,7 @@ export function LeadForm({ mode = "contact" }: LeadFormProps) {
     setStatus("sending");
     const whatsappWindow = window.open("about:blank", "_blank");
     const params = new URLSearchParams(window.location.search);
+    const formStartedAt = startedAt.current ?? Date.now();
 
     try {
       const response = await fetch("/api/leads", {
@@ -71,7 +76,7 @@ export function LeadForm({ mode = "contact" }: LeadFormProps) {
           utmSource: params.get("utm_source") || "",
           utmMedium: params.get("utm_medium") || "",
           utmCampaign: params.get("utm_campaign") || "",
-          startedAt: startedAt.current,
+          startedAt: formStartedAt,
         }),
       });
 
@@ -201,7 +206,13 @@ export function LeadForm({ mode = "contact" }: LeadFormProps) {
 
       <label className="honeypot" aria-hidden="true">
         <span>Sitio web</span>
-        <input name="website" tabIndex={-1} autoComplete="off" value={form.website} onChange={(event) => setField("website", event.target.value)} />
+        <input
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+          value={form.website}
+          onChange={(event) => setField("website", event.target.value)}
+        />
       </label>
 
       <label className="consent-check">
@@ -212,7 +223,7 @@ export function LeadForm({ mode = "contact" }: LeadFormProps) {
           required
         />
         <span>
-          Autorizo a Hocker AGI Technologies a contactarme sobre esta solicitud. He leído el {" "}
+          Autorizo a Hocker AGI Technologies a contactarme sobre esta solicitud. He leído el{" "}
           <Link href="/legal/privacy">aviso de privacidad</Link>.
         </span>
       </label>
@@ -221,10 +232,16 @@ export function LeadForm({ mode = "contact" }: LeadFormProps) {
         <button type="submit" className="button button-primary button-big" disabled={status === "sending"}>
           {status === "sending" ? "Enviando..." : "Enviar y continuar en WhatsApp"}
         </button>
-        <a href={`mailto:${PUBLIC_SITE.email}`} className="text-link">Prefiero enviar un correo</a>
+        <a href={`mailto:${PUBLIC_SITE.email}`} className="text-link">
+          Prefiero enviar un correo
+        </a>
       </div>
 
-      {feedback ? <p className={`form-feedback form-feedback-${status}`} role="status">{feedback}</p> : null}
+      {feedback ? (
+        <p className={`form-feedback form-feedback-${status}`} role="status">
+          {feedback}
+        </p>
+      ) : null}
     </form>
   );
 }
