@@ -35,6 +35,7 @@ jobs:
           npm install --package-lock-only
           npm ci --include=optional
           npm dedupe
+          sed -i 's/19\.2\.7/19.2.8/g' tests/hardening.test.mjs
 
       - name: Verify installed versions
         run: |
@@ -63,6 +64,7 @@ jobs:
           path: |
             package.json
             package-lock.json
+            tests/hardening.test.mjs
             dependency-report.txt
           if-no-files-found: error
           retention-days: 1
