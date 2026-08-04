@@ -6,6 +6,7 @@ import { AnalyticsConsent } from "@/components/analytics-consent";
 import { PUBLIC_SITE } from "@/lib/public-site";
 import "./globals.css";
 import "./commercial.css";
+import "./polish.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(PUBLIC_SITE.url),
