@@ -12,7 +12,7 @@ import {
 } from "@/lib/public-site";
 
 export const metadata: Metadata = {
-  title: "IA, automatización y marketing para empresas",
+  title: "IA, automatización y marketing | Hocker AGI",
   description: PUBLIC_SITE.description,
   alternates: { canonical: "/" },
 };
