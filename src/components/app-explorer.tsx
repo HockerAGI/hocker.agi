@@ -65,7 +65,7 @@ export function AppExplorer({ apps }: { apps: AppItem[] }) {
         {filtered.map((app) => (
           <article key={app.slug} className="card card-pad app-card">
             <div className="app-top">
-              <Image src={app.logo} alt={`Logotipo de ${app.title}`} width={88} height={88} className="app-logo" />
+              <Image src={app.icon} alt={`Icono oficial de ${app.title}`} width={88} height={88} className="app-logo" />
               <div className="app-title">
                 <span>{app.badge}</span>
                 <strong>{app.title}</strong>
