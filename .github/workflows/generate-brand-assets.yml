@@ -7,6 +7,7 @@ on:
       - fix/brand-assets-mobile-20260804
     paths:
       - scripts/generate-brand-assets.mjs
+      - scripts/generate-site-icons.mjs
       - .github/workflows/generate-brand-assets.yml
 
 permissions:
@@ -33,17 +34,19 @@ jobs:
         run: npm ci
 
       - name: Generate normalized assets
-        run: node scripts/generate-brand-assets.mjs
+        run: |
+          node scripts/generate-brand-assets.mjs
+          node scripts/generate-site-icons.mjs
 
       - name: Commit generated files
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/apps public/brand
+          git add public/apps public/brand public/icon.png public/apple-icon.png public/og-image.png
           if git diff --cached --quiet; then
             echo "No generated changes to commit."
             exit 0
           fi
-          git commit -m "chore(brand): generate normalized product assets [skip ci] [skip vercel]"
+          git commit -m "chore(brand): generate normalized product and site assets [skip ci] [skip vercel]"
           git push origin HEAD:fix/brand-assets-mobile-20260804
