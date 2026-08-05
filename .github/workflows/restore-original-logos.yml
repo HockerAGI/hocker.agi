@@ -122,7 +122,8 @@ jobs:
             await render(cover, path.join(directory, 'cover.webp'), 1600, 900, 'webp', 24);
             await render(cover, path.join(directory, 'og-image.webp'), 1200, 630, 'webp', 24);
 
-            await fs.rm(path.join(directory, 'icon.svg'), { force: true });
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image href="icon.png" width="512" height="512" preserveAspectRatio="xMidYMid meet"/></svg>\n`;
+            await fs.writeFile(path.join(directory, 'icon.svg'), svg, 'utf8');
             await fs.rm(logo, { force: true });
             await fs.rm(cover, { force: true });
           }
