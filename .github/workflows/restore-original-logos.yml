@@ -146,15 +146,17 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/apps .brand-source-originals
-          git rm --cached --ignore-unmatch .github/workflows/restore-original-logos.yml
+
+          git add public/apps
+          rm -rf .brand-source-originals
+          git add -A .brand-source-originals || true
           rm -f .github/workflows/restore-original-logos.yml
-          git add -u .github/workflows/restore-original-logos.yml
+          git add -A .github/workflows/restore-original-logos.yml
 
           if git diff --cached --quiet; then
             echo "No asset changes detected."
             exit 0
           fi
 
-          git commit -m "fix(brand): restore exact original product logos [skip vercel]"
+          git commit -m "fix(brand): restore exact original product logos"
           git push origin HEAD:fix/restore-original-logos-20260805
