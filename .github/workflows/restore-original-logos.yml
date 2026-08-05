@@ -1,11 +1,12 @@
 name: Restore original product logos
 
 on:
-  push:
+  pull_request:
     branches:
-      - fix/restore-original-logos-20260805
+      - main
     paths:
       - .github/workflows/restore-original-logos.yml
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -16,6 +17,7 @@ concurrency:
 
 jobs:
   restore:
+    if: github.head_ref == 'fix/restore-original-logos-20260805' || github.ref_name == 'fix/restore-original-logos-20260805'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout complete history
@@ -76,14 +78,8 @@ jobs:
 
           async function backgroundFor(file) {
             const image = sharp(file);
-            const metadata = await image.metadata();
             const { dominant } = await image.stats();
-            return {
-              r: dominant.r,
-              g: dominant.g,
-              b: dominant.b,
-              alpha: 1,
-            };
+            return { r: dominant.r, g: dominant.g, b: dominant.b, alpha: 1 };
           }
 
           async function render(input, output, width, height, format, margin = 0) {
@@ -107,11 +103,9 @@ jobs:
                 background,
               });
 
-            if (format === 'webp') {
-              pipeline = pipeline.webp({ quality: 90, effort: 6 });
-            } else {
-              pipeline = pipeline.png({ compressionLevel: 9, adaptiveFiltering: true });
-            }
+            pipeline = format === 'webp'
+              ? pipeline.webp({ quality: 90, effort: 6 })
+              : pipeline.png({ compressionLevel: 9, adaptiveFiltering: true });
 
             await pipeline.toFile(output);
           }
