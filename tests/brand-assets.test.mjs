@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { access } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import path from "node:path";
 import { createRequire } from "node:module";
 import test from "node:test";
@@ -36,10 +36,13 @@ async function assertImage(file, width, height, format) {
   assert.equal(metadata.format, format, `${file} format`);
 }
 
-test("every public product ships the normalized identity kit", async () => {
+test("every public product ships a faithful technical identity kit", async () => {
   for (const slug of productSlugs) {
     const directory = path.join(root, "public", "apps", slug);
-    await access(path.join(directory, "icon.svg"));
+    const svg = await readFile(path.join(directory, "icon.svg"), "utf8");
+    assert.match(svg, /<image href="icon\.png"/);
+    assert.doesNotMatch(svg, /<path\b/);
+
     for (const [name, width, height, format] of expectedAssets) {
       await assertImage(path.join(directory, name), width, height, format);
     }
