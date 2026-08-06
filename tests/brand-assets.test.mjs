@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { access } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import path from "node:path";
 import { createRequire } from "node:module";
 import test from "node:test";
@@ -13,6 +13,16 @@ const productSlugs = [
   "hocker-hub",
   "hocker-drive-cloud",
   "hocker-wallet",
+  "chido-casino",
+  "trackhok",
+  "nexpa",
+  "hocker-up",
+  "hocker-supply",
+];
+const restoredOriginalSlugs = [
+  "hocker-one",
+  "hocker-hub",
+  "hocker-drive-cloud",
   "chido-casino",
   "trackhok",
   "nexpa",
@@ -36,13 +46,22 @@ async function assertImage(file, width, height, format) {
   assert.equal(metadata.format, format, `${file} format`);
 }
 
-test("every public product ships the normalized identity kit", async () => {
+test("every public product ships a complete technical identity kit", async () => {
   for (const slug of productSlugs) {
     const directory = path.join(root, "public", "apps", slug);
     await access(path.join(directory, "icon.svg"));
+
     for (const [name, width, height, format] of expectedAssets) {
       await assertImage(path.join(directory, name), width, height, format);
     }
+  }
+});
+
+test("restored original logos are never replaced by redrawn SVG geometry", async () => {
+  for (const slug of restoredOriginalSlugs) {
+    const svg = await readFile(path.join(root, "public", "apps", slug, "icon.svg"), "utf8");
+    assert.match(svg, /<image\s+href="icon\.png"/);
+    assert.doesNotMatch(svg, /<(path|polygon|polyline|circle|ellipse|rect)\b/);
   }
 });
 

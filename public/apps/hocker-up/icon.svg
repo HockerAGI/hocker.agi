@@ -1,16 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
-  <defs>
-    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#f8fafc"/><stop offset="0.18" stop-color="#64748b"/>
-      <stop offset="0.52" stop-color="#0f172a"/><stop offset="0.82" stop-color="#475569"/><stop offset="1" stop-color="#020617"/>
-    </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#7c6cff"/><stop offset="1" stop-color="#18b9ff"/>
-    </linearGradient>
-    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#38bdf8"/><stop offset="0.55" stop-color="#0878d8"/><stop offset="1" stop-color="#1d4ed8"/>
-    </linearGradient>
-    <radialGradient id="glow"><stop offset="0" stop-color="#7c6cff" stop-opacity=".42"/><stop offset="1" stop-color="#7c6cff" stop-opacity="0"/></radialGradient>
-    <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#000" flood-opacity=".62"/></filter>
-    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="24"/></filter>
-  </defs><circle cx="256" cy="256" r="210" fill="url(#glow)" opacity=".4"/><g filter="url(#shadow)" fill="none" stroke="url(#accent)" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"><path d="M124 348c0-39 48-39 48 0 0 35-48 35-48 0zm24-17 96-104v119"/><path d="M252 346V166l-49 49"/><path d="M252 166l49 49"/><path d="M310 346V150l-49 49"/><path d="M310 150l55 55"/><circle cx="310" cy="370" r="20" fill="#130b2d" stroke="#9b7cff"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image href="icon.png" width="512" height="512" preserveAspectRatio="xMidYMid meet"/></svg>
