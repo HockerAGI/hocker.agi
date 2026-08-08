@@ -60,3 +60,8 @@ jobs:
         env:
           NPM_CONFIG_REGISTRY: https://registry.npmjs.org
         run: npm audit --omit=dev --audit-level=high
+
+      - name: Full dependency audit
+        env:
+          NPM_CONFIG_REGISTRY: https://registry.npmjs.org
+        run: npm audit --audit-level=high
