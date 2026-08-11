@@ -92,7 +92,7 @@ export function LeadForm({ mode = "contact" }: LeadFormProps) {
 
       const whatsappUrl = `${PUBLIC_SITE.whatsapp}?text=${encodeURIComponent(whatsappMessage)}`;
       if (whatsappWindow) whatsappWindow.location.href = whatsappUrl;
-      else window.location.href = whatsappUrl;
+      else window.open(whatsappUrl, "_self");
 
       setStatus("success");
       setFeedback(
