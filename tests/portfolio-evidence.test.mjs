@@ -1,0 +1,4 @@
+import test from"node:test";import assert from"node:assert/strict";import{readFileSync}from"node:fs";const read=p=>readFileSync(new URL(`../${p}`,import.meta.url),"utf8");
+test("portfolio encodes current CV career stages without percentages",()=>{const s=read("src/content/portfolio/profile.ts")+read("src/content/portfolio/experience.ts");for(const e of["Grupo Aries","Monsat","SEITCOM","12 Volts Shop","NANODREX","Hocker AGI Technologies"])assert.match(s,new RegExp(e,"i"));assert.doesNotMatch(s,/\b\d{1,3}%\b/)});
+test("Pinocho remains DOCUMENTED and does not overclaim",()=>{const s=read("src/content/portfolio/evidence.ts");assert.match(s,/Pinocho/);assert.match(s,/DOCUMENTED/);assert.doesNotMatch(s,/award|premio|supervisor|lead editor|director/i)});
+test("Score Store and HOCKER are initial cases",()=>{const s=read("src/content/portfolio/cases.ts");assert.match(s,/Score Store/);assert.match(s,/Hocker AGI Technologies/)});
