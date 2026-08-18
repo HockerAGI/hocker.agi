@@ -59,9 +59,9 @@ jobs:
       - name: Production dependency audit
         env:
           NPM_CONFIG_REGISTRY: https://registry.npmjs.org
-        run: npm audit --omit=dev --audit-level=high
+        run: node scripts/audit-dependencies.mjs --omit-dev
 
       - name: Full dependency audit
         env:
           NPM_CONFIG_REGISTRY: https://registry.npmjs.org
-        run: npm audit --audit-level=high
+        run: node scripts/audit-dependencies.mjs
