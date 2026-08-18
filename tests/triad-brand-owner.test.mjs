@@ -1,0 +1,10 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
+const file=path.join(root,"public/brand/hocker-agi-official-lockup.jpg");
+test("runtime brand master is byte-identical to the approved graphite lockup",()=>{const hash=createHash("sha256").update(readFileSync(file)).digest("hex");assert.equal(hash,"d46ee5387da5afc36480c3ae8aadaa05298e13333272dbe229c8aef4d9320128")});
+test("public site references only the approved runtime lockup",()=>{const site=readFileSync(path.join(root,"src/lib/public-site.ts"),"utf8");assert.match(site,/hocker-agi-official-lockup\.jpg/);assert.doesNotMatch(site,/hocker-agi-(symbol|hero|horizontal|lockup)\.(png|webp)/)});

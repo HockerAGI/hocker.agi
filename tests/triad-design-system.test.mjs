@@ -1,0 +1,3 @@
+import test from "node:test";import assert from "node:assert/strict";import{readFileSync}from"node:fs";const read=p=>readFileSync(new URL(`../${p}`,import.meta.url),"utf8");
+test("TRIAD exposes canonical brand tokens",()=>{const css=read("src/design-system/tokens.css");for(const t of["--h-obsidian","--h-titanium-950","--h-titanium-800","--h-titanium-600","--h-silver","--h-text-muted","--h-ice","--h-blue-deep","--h-blue","--h-blue-electric"])assert.match(css,new RegExp(t))});
+test("TRIAD has reduced motion and bounded display type",()=>{assert.match(read("src/design-system/motion.css"),/prefers-reduced-motion/);assert.match(read("src/design-system/typography.css"),/clamp\(/);assert.doesNotMatch(read("src/design-system/typography.css"),/font-size:\s*(9|10)px/)});

@@ -1,0 +1,3 @@
+import test from "node:test";import assert from"node:assert/strict";import{readFileSync}from"node:fs";const read=p=>readFileSync(new URL(`../${p}`,import.meta.url),"utf8");
+test("legacy Precision Future selectors are absent",()=>{const css=read("src/app/globals.css")+read("src/design-system/layout.css");for(const x of[/vnext-/i,/mobile-dock/i,/floating-whatsapp/i,/system-view/i])assert.doesNotMatch(css,x)});
+test("legacy Precision Future imports are absent",()=>{const l=read("src/app/layout.tsx");for(const f of["commercial.css","polish.css","vnext.css","legacy-vnext.css"])assert.doesNotMatch(l,new RegExp(f.replace(".","\\.")))});
