@@ -35,13 +35,37 @@ export function evaluateAuditReport(report, now = new Date()) {
   const vulnerabilities = report?.vulnerabilities && typeof report.vulnerabilities === "object"
     ? report.vulnerabilities
     : {};
-  const nanoid = vulnerabilities.nanoid;
-  const nanoidException = Boolean(
-    nanoid &&
-    BLOCKING_SEVERITIES.has(String(nanoid.severity).toLowerCase()) &&
-    hasExactNanoidAdvisory(nanoid) &&
-    isExceptionActive(now)
-  );
+  const active = isExceptionActive(now);
+  const memo = new Map();
+
+  function derivesOnlyFromReviewedNanoid(name, visiting = new Set()) {
+    if (memo.has(name)) return memo.get(name);
+    if (visiting.has(name)) return false;
+    const vulnerability = vulnerabilities[name];
+    if (!vulnerability || !BLOCKING_SEVERITIES.has(String(vulnerability.severity).toLowerCase())) return false;
+
+    if (name === "nanoid" && active && hasExactNanoidAdvisory(vulnerability)) {
+      memo.set(name, true);
+      return true;
+    }
+
+    if (directViaEntries(vulnerability).length > 0) {
+      memo.set(name, false);
+      return false;
+    }
+
+    const dependencies = stringViaEntries(vulnerability);
+    if (dependencies.length === 0) {
+      memo.set(name, false);
+      return false;
+    }
+
+    const nextVisiting = new Set(visiting);
+    nextVisiting.add(name);
+    const allowed = dependencies.every((dependency) => derivesOnlyFromReviewedNanoid(dependency, nextVisiting));
+    memo.set(name, allowed);
+    return allowed;
+  }
 
   const blocking = [];
   const exceptions = [];
@@ -49,18 +73,7 @@ export function evaluateAuditReport(report, now = new Date()) {
   for (const [name, vulnerability] of Object.entries(vulnerabilities)) {
     if (!BLOCKING_SEVERITIES.has(String(vulnerability?.severity).toLowerCase())) continue;
 
-    if (name === "nanoid" && nanoidException) {
-      exceptions.push({ name, advisory: NANOID_POSTCSS_EXCEPTION.advisory });
-      continue;
-    }
-
-    const derivedOnlyFromNanoid = name === "postcss" &&
-      nanoidException &&
-      directViaEntries(vulnerability).length === 0 &&
-      stringViaEntries(vulnerability).length > 0 &&
-      stringViaEntries(vulnerability).every((entry) => entry === "nanoid");
-
-    if (derivedOnlyFromNanoid) {
+    if (derivesOnlyFromReviewedNanoid(name)) {
       exceptions.push({ name, advisory: NANOID_POSTCSS_EXCEPTION.advisory });
       continue;
     }
@@ -77,6 +90,6 @@ export function evaluateAuditReport(report, now = new Date()) {
     ok: blocking.length === 0,
     blocking,
     exceptions,
-    exceptionExpired: !isExceptionActive(now),
+    exceptionExpired: !active,
   };
 }

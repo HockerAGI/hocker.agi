@@ -25,14 +25,16 @@ At review time, npm exposes `3.3.16` as the supported `legacy` 3.x line while th
 
 ## CI policy
 
-`scripts/audit-dependencies.mjs` parses `npm audit --json` and permits this exception only when:
+`scripts/audit-dependencies.mjs` parses `npm audit --json`. It permits the exception only when a blocking path resolves recursively and exclusively to the exact NanoID advisory above. This matters because npm can represent the same advisory at different levels of the dependency graph, such as `Next -> PostCSS -> NanoID`.
 
-1. the blocking direct advisory is exactly the NanoID advisory above;
-2. a `postcss` High is derived only from that NanoID entry;
+The gate requires all of the following:
+
+1. the leaf advisory is exactly GHSA-2v37-7h3g-55p8;
+2. every parent in the accepted chain contains only string references to already accepted dependencies and no direct advisory object;
 3. the current time is before the expiration timestamp;
-4. there are no other High or Critical vulnerabilities.
+4. there are no unrelated High or Critical vulnerabilities.
 
-The gate fails if the exception expires, the advisory changes shape, or any unrelated High/Critical vulnerability appears.
+A direct advisory on Next, PostCSS or any other parent is never inherited into this exception and fails CI.
 
 ## Removal criteria
 
