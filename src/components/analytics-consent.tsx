@@ -38,7 +38,9 @@ function enableOptionalMeasurement(consent: ConsentState) {
     const win = window as typeof window & { fbq?: MetaPixel };
     if (!win.fbq) {
       const queue: unknown[][] = [];
-      const fbq = ((...args: unknown[]) => queue.push(args)) as MetaPixel;
+      const fbq = ((...args: unknown[]) => {
+        queue.push(args);
+      }) as MetaPixel;
       fbq.queue = queue;
       win.fbq = fbq;
     }
