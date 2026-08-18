@@ -8,95 +8,30 @@ import "./globals.css";
 import "./commercial.css";
 import "./polish.css";
 import "./vnext.css";
+import "./legacy-vnext.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(PUBLIC_SITE.url),
   applicationName: PUBLIC_SITE.brand,
-  title: {
-    default: PUBLIC_SITE.title,
-    template: `%s | ${PUBLIC_SITE.brand}`,
-  },
+  title: { default: PUBLIC_SITE.title, template: `%s | ${PUBLIC_SITE.brand}` },
   description: PUBLIC_SITE.description,
   category: "technology",
   authors: [{ name: PUBLIC_SITE.founder, url: PUBLIC_SITE.founderProfile }],
   creator: PUBLIC_SITE.founder,
   publisher: PUBLIC_SITE.brand,
-  openGraph: {
-    title: PUBLIC_SITE.title,
-    description: PUBLIC_SITE.description,
-    url: PUBLIC_SITE.url,
-    siteName: PUBLIC_SITE.brand,
-    locale: PUBLIC_SITE.locale,
-    images: [{ url: PUBLIC_SITE.ogImage, width: 1600, height: 900, alt: PUBLIC_SITE.brand }],
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: PUBLIC_SITE.title,
-    description: PUBLIC_SITE.description,
-    images: [PUBLIC_SITE.ogImage],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
-  },
+  openGraph: { title: PUBLIC_SITE.title, description: PUBLIC_SITE.description, url: PUBLIC_SITE.url, siteName: PUBLIC_SITE.brand, locale: PUBLIC_SITE.locale, images: [{ url: PUBLIC_SITE.ogImage, width: 1600, height: 900, alt: PUBLIC_SITE.brand }], type: "website" },
+  twitter: { card: "summary_large_image", title: PUBLIC_SITE.title, description: PUBLIC_SITE.description, images: [PUBLIC_SITE.ogImage] },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
   icons: { icon: "/icon.png", apple: "/apple-icon.png" },
 };
 
 const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": ["Organization", "ProfessionalService"],
-  "@id": `${PUBLIC_SITE.url}/#organization`,
-  name: PUBLIC_SITE.brand,
-  url: PUBLIC_SITE.url,
-  logo: `${PUBLIC_SITE.url}${PUBLIC_SITE.symbol}`,
-  image: `${PUBLIC_SITE.url}${PUBLIC_SITE.ogImage}`,
-  description: PUBLIC_SITE.description,
-  email: PUBLIC_SITE.email,
-  telephone: PUBLIC_SITE.phoneE164,
-  founder: {
-    "@type": "Person",
-    name: PUBLIC_SITE.founder,
-    url: `${PUBLIC_SITE.url}${PUBLIC_SITE.founderProfile}`,
-  },
-  areaServed: PUBLIC_SITE.areaServed,
-  contactPoint: [{
-    "@type": "ContactPoint",
-    contactType: "sales",
-    telephone: PUBLIC_SITE.phoneE164,
-    email: PUBLIC_SITE.email,
-    availableLanguage: ["es", "en"],
-    areaServed: "MX",
-  }],
+  "@context": "https://schema.org", "@type": ["Organization", "ProfessionalService"], "@id": `${PUBLIC_SITE.url}/#organization`, name: PUBLIC_SITE.brand, url: PUBLIC_SITE.url, logo: `${PUBLIC_SITE.url}${PUBLIC_SITE.symbol}`, image: `${PUBLIC_SITE.url}${PUBLIC_SITE.ogImage}`, description: PUBLIC_SITE.description, email: PUBLIC_SITE.email, telephone: PUBLIC_SITE.phoneE164,
+  founder: { "@type": "Person", name: PUBLIC_SITE.founder, url: `${PUBLIC_SITE.url}${PUBLIC_SITE.founderProfile}` }, areaServed: PUBLIC_SITE.areaServed,
+  contactPoint: [{ "@type": "ContactPoint", contactType: "sales", telephone: PUBLIC_SITE.phoneE164, email: PUBLIC_SITE.email, availableLanguage: ["es", "en"], areaServed: "MX" }],
 };
-
-const websiteSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "@id": `${PUBLIC_SITE.url}/#website`,
-  url: PUBLIC_SITE.url,
-  name: PUBLIC_SITE.brand,
-  description: PUBLIC_SITE.description,
-  inLanguage: "es-MX",
-  publisher: { "@id": `${PUBLIC_SITE.url}/#organization` },
-};
+const websiteSchema = { "@context": "https://schema.org", "@type": "WebSite", "@id": `${PUBLIC_SITE.url}/#website`, url: PUBLIC_SITE.url, name: PUBLIC_SITE.brand, description: PUBLIC_SITE.description, inLanguage: "es-MX", publisher: { "@id": `${PUBLIC_SITE.url}/#organization` } };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  return (
-    <html lang="es-MX">
-      <body>
-        <Script id="organization-structured-data" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
-        <Script id="website-structured-data" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
-        <SiteShell>{children}</SiteShell>
-        <AnalyticsConsent />
-      </body>
-    </html>
-  );
+  return <html lang="es-MX"><body><Script id="organization-structured-data" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} /><Script id="website-structured-data" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} /><SiteShell>{children}</SiteShell><AnalyticsConsent /></body></html>;
 }
