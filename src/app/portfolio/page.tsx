@@ -1,5 +1,1 @@
-import { permanentRedirect } from "next/navigation";
-
-export default function LegacyPortfolioPage() {
-  permanentRedirect("/portafolio");
-}
+import{permanentRedirect}from"next/navigation";export default function Page(){permanentRedirect("/portafolio")}
