@@ -1,0 +1,3 @@
+@keyframes h-cut-in{from{transform:scaleX(0);opacity:0}to{transform:scaleX(1);opacity:1}}@keyframes h-rise{from{transform:translateY(16px);opacity:0}to{transform:none;opacity:1}}
+.hocker-cut{display:block;height:3px;width:min(180px,34vw);background:linear-gradient(90deg,var(--h-blue-deep),var(--h-blue-electric));transform-origin:left center;transform:skewX(-30deg);animation:h-cut-in var(--h-motion-cinematic) cubic-bezier(.2,.8,.2,1) both}.h-reveal{animation:h-rise var(--h-motion-cinematic) cubic-bezier(.2,.8,.2,1) both}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}.hocker-cut{transform:skewX(-30deg)}}

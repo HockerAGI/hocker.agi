@@ -1,0 +1,4 @@
+.h-eyebrow{font-size:clamp(.76rem,.7vw,.86rem);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--h-blue-soft)}
+.h-display{font-size:clamp(3.4rem,7.3vw,7.4rem);line-height:.91;letter-spacing:-.068em;text-wrap:balance;font-weight:720}.h-display span{color:var(--h-blue-electric)}
+.h-h2{font-size:clamp(2.25rem,4.6vw,4.8rem);line-height:.98;letter-spacing:-.052em;text-wrap:balance}.h-h3{font-size:clamp(1.45rem,2vw,2rem);line-height:1.08;letter-spacing:-.025em}.h-lead{font-size:clamp(1.06rem,1.7vw,1.34rem);line-height:1.55;color:var(--h-text-muted);max-width:62ch}.h-copy{font-size:clamp(1rem,1.1vw,1.1rem);line-height:1.7;color:var(--h-text-muted);max-width:var(--h-reading-max)}
+@media(max-width:430px){.h-display{font-size:clamp(2.65rem,13vw,3.45rem);line-height:.95}.h-h2{font-size:clamp(2rem,10vw,2.8rem)}.h-lead{font-size:1.03rem;line-height:1.55}}
