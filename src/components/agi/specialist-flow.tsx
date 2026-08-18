@@ -1,0 +1,1 @@
+export function SpecialistFlow({specialists}:{specialists:readonly string[]}){return <div className="specialist-flow" aria-label="Especialidades coordinadas">{specialists.map((s,i)=><div className="specialist-node" key={s}><small>{i===0?"COORDINA":"ESPECIALIZA"}</small><strong>{s}</strong></div>)}</div>}
