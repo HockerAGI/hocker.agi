@@ -1,70 +1,27 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { AgiOperatingDemo } from "@/components/agi-operating-demo";
 
 export const metadata: Metadata = {
-  title: "Agentes especializados de inteligencia artificial",
-  description: "Conoce cómo Hocker AGI organiza agentes especializados para marketing, automatización, análisis, seguridad y operación.",
+  title: "AGIs especializadas y gobernanza de IA",
+  description: "Conoce el modelo operativo de HOCKER: NOVA coordina especialistas y las acciones materiales se gobiernan mediante políticas, evidencia y Owner Gate.",
   alternates: { canonical: "/agis" },
 };
 
-const capabilities = [
-  { title: "Orquestación", text: "Coordina solicitudes, contexto, reglas y prioridades para que cada flujo tenga una salida consistente.", benefit: "Menos tareas sueltas y mayor continuidad." },
-  { title: "Marketing y contenido", text: "Apoya investigación, planeación, variantes creativas, copies, reporting y aprendizaje de campañas.", benefit: "Producción más rápida con control de marca." },
-  { title: "Ventas y seguimiento", text: "Califica solicitudes, prepara contexto y activa tareas de seguimiento sin sustituir decisiones comerciales críticas.", benefit: "Menor tiempo de respuesta y mejor trazabilidad." },
-  { title: "Análisis y finanzas", text: "Consolida indicadores, detecta desviaciones y presenta información útil para priorizar acciones.", benefit: "Decisiones basadas en datos verificables." },
-  { title: "Infraestructura y seguridad", text: "Supervisa integraciones, permisos, registros, disponibilidad y cumplimiento de reglas técnicas.", benefit: "Operación más controlada y auditable." },
-  { title: "Conocimiento y memoria", text: "Organiza documentos y contexto autorizado para evitar comenzar desde cero en cada interacción.", benefit: "Respuestas coherentes y aprendizaje operativo." },
+const agents = [
+  ["NOVA", "Orquestación", "Coordina contexto, misión y especialistas dentro de límites definidos."],
+  ["SYNTIA", "Memoria", "Organiza contexto y conocimiento autorizado con trazabilidad."],
+  ["VERTX", "Seguridad", "Revisa integridad, riesgos técnicos y evidencia de seguridad."],
+  ["NUMIA", "FinOps", "Analiza costos, presupuestos y señales financieras sin mover fondos."],
+  ["REVIA", "Revenue", "Prepara calificación, seguimiento y contexto comercial."],
+  ["NOVA ADS", "Growth", "Especializa análisis y planeación de adquisición y campañas."],
 ] as const;
 
 export default function AgisPage() {
-  return (
-    <>
-      <section className="page-hero commercial-page-hero">
-        <div className="container narrow-container">
-          <p className="eyebrow">AGENTES ESPECIALIZADOS</p>
-          <h1 className="hero-title">Una arquitectura de IA por funciones, no un chatbot para todo.</h1>
-          <p className="hero-text">
-            Distribuimos tareas entre capacidades especializadas y mantenemos reglas de aprobación humana para acciones sensibles, financieras o legales.
-          </p>
-          <div className="hero-actions">
-            <Link href="/contacto" className="button button-primary button-big">Evaluar un caso de uso</Link>
-            <Link href="/ecosistema" className="button button-secondary button-big">Conocer la arquitectura</Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <div className="section-head split-head">
-            <div>
-              <p className="eyebrow">CAPACIDADES PÚBLICAS</p>
-              <h2>Especialización donde realmente aporta.</h2>
-            </div>
-            <p>La composición de agentes, modelos e integraciones se define según el proyecto. La información sensible de infraestructura no se expone en el sitio público.</p>
-          </div>
-          <div className="capability-grid">
-            {capabilities.map((item, index) => (
-              <article key={item.title}>
-                <span>0{index + 1}</span>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-                <strong>{item.benefit}</strong>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section section-contrast">
-        <div className="container proposal-panel">
-          <div>
-            <p className="eyebrow">CONTROL Y GOBERNANZA</p>
-            <h2>La autonomía se limita por reglas, permisos y evidencia.</h2>
-            <p>Las acciones críticas requieren validación, trazabilidad y un responsable definido. Automatizar no significa perder el control.</p>
-          </div>
-          <Link href="/contacto" className="button button-primary button-big">Solicitar diagnóstico</Link>
-        </div>
-      </section>
-    </>
-  );
+  return <>
+    <section className="vnext-page-hero vnext-agi-hero"><div className="container vnext-page-grid"><div><p className="vnext-kicker">16 AGIs / ESPECIALIZACIÓN GOBERNADA</p><h1>Una IA no necesita hacerlo todo para aportar más.</h1><p className="vnext-lead">HOCKER separa responsabilidades: NOVA coordina, especialistas analizan y las acciones materiales permanecen sujetas a controles, aprobación y evidencia.</p><div className="hero-actions"><Link href="#demo" className="button button-primary button-big">Ver demostración</Link><Link href="/contacto" className="button button-secondary button-big">Evaluar caso de uso</Link></div></div><aside className="vnext-state-panel"><span>PUBLIC OPERATING MODEL</span><strong>Reason → Review → Evidence → Gate</strong><p>La interfaz pública no expone secretos, credenciales ni herramientas internas.</p></aside></div></section>
+    <section className="section" id="demo"><div className="container"><div className="vnext-section-heading vnext-split-heading"><div><p className="vnext-kicker">DEMOSTRACIÓN DEL MODELO OPERATIVO</p><h2>Así se distribuye una misión.</h2></div><p>Es una simulación de interfaz basada en el modelo actual. No invoca runtimes ni ejecuta acciones productivas.</p></div><AgiOperatingDemo /></div></section>
+    <section className="section vnext-surface-section"><div className="container"><div className="vnext-section-heading"><p className="vnext-kicker">ESPECIALISTAS REPRESENTATIVOS</p><h2>Dominios claros, permisos mínimos.</h2></div><div className="vnext-agent-grid">{agents.map(([name, domain, text]) => <article key={name}><span>{domain}</span><h3>{name}</h3><p>{text}</p></article>)}</div><p className="vnext-trust-note">El registro operativo actual mantiene las 16 AGIs con ejecución material deshabilitada desde la capa de razonamiento. El Owner Gate de Hocker One conserva autoridad sobre acciones sensibles.</p></div></section>
+    <section className="section"><div className="container vnext-governance-grid"><div><p className="vnext-kicker">GOBERNANZA</p><h2>Razonar no equivale a ejecutar.</h2></div><div className="vnext-rule-list"><p><strong>01 · Mínimo privilegio.</strong> Cada capacidad recibe únicamente el contexto y las herramientas necesarias.</p><p><strong>02 · Salida estructurada.</strong> Propuestas, evidencia y riesgos se separan de cualquier efecto externo.</p><p><strong>03 · Owner Gate.</strong> Las acciones materiales pasan por controles y aprobación proporcional al riesgo.</p><p><strong>04 · Trazabilidad.</strong> La evidencia importa tanto como la respuesta.</p></div></div></section>
+  </>;
 }

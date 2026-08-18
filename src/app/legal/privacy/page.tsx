@@ -3,83 +3,20 @@ import Link from "next/link";
 import { PUBLIC_SITE } from "@/lib/public-site";
 
 export const metadata: Metadata = {
-  title: "Aviso de privacidad",
-  description: "Aviso de privacidad aplicable al sitio, formularios y medición de Hocker AGI Technologies.",
+  title: "Privacidad del sitio",
+  description: "Información de privacidad aplicable al sitio, formularios y medición opcional de Hocker AGI Technologies.",
   alternates: { canonical: "/legal/privacy" },
 };
 
 export default function PrivacyPage() {
-  return (
-    <main className="section legal-page">
-      <div className="container narrow-container">
-        <p className="eyebrow">LEGAL</p>
-        <h1>Aviso de privacidad</h1>
-        <p className="legal-updated">Última actualización: 4 de agosto de 2026</p>
-
-        <div className="legal-content">
-          <section>
-            <h2>1. Responsable</h2>
-            <p>
-              {PUBLIC_SITE.brand} es responsable del tratamiento de los datos personales recabados mediante este sitio. Para asuntos de privacidad puedes escribir a {" "}
-              <a href={`mailto:${PUBLIC_SITE.email}`}>{PUBLIC_SITE.email}</a>.
-            </p>
-          </section>
-
-          <section>
-            <h2>2. Datos que podemos recabar</h2>
-            <p>
-              Nombre, empresa, correo, teléfono, necesidad, rango de inversión, mensaje, página de origen y parámetros de campaña. También podemos recibir datos técnicos limitados, como navegador y fecha de envío, para seguridad y diagnóstico.
-            </p>
-          </section>
-
-          <section>
-            <h2>3. Finalidades</h2>
-            <p>
-              Usamos la información para responder solicitudes, preparar diagnósticos o propuestas, dar seguimiento comercial, prestar servicios contratados, prevenir abuso del formulario y medir el rendimiento del sitio cuando existe consentimiento.
-            </p>
-          </section>
-
-          <section>
-            <h2>4. Encargados y transferencias</h2>
-            <p>
-              Los datos pueden procesarse mediante proveedores de hosting, automatización, correo, mensajería, analítica o CRM que actúan por cuenta de Hocker AGI Technologies. No vendemos datos personales. Una transferencia adicional se realizará únicamente cuando sea necesaria para prestar el servicio o exista obligación legal.
-            </p>
-          </section>
-
-          <section id="cookies">
-            <h2>5. Cookies y medición</h2>
-            <p>
-              El sitio puede usar almacenamiento local para recordar preferencias. Google Analytics y Meta Pixel solo se cargan después de que el usuario acepta la medición opcional. Rechazarla no limita el acceso al sitio ni al formulario.
-            </p>
-          </section>
-
-          <section>
-            <h2>6. Conservación y seguridad</h2>
-            <p>
-              Conservamos los datos durante el tiempo necesario para atender la relación comercial, cumplir obligaciones y resolver aclaraciones. Aplicamos controles razonables de acceso, cifrado en tránsito y validación del formulario; ningún sistema conectado a internet puede garantizar riesgo cero.
-            </p>
-          </section>
-
-          <section>
-            <h2>7. Derechos de acceso, rectificación, cancelación y oposición</h2>
-            <p>
-              Puedes solicitar acceso, corrección, eliminación u oposición al tratamiento enviando un correo desde una dirección verificable. Incluye tu nombre, la petición concreta y la información necesaria para localizar el registro.
-            </p>
-          </section>
-
-          <section>
-            <h2>8. Cambios al aviso</h2>
-            <p>
-              Las modificaciones se publicarán en esta página con su fecha de actualización. Cuando el cambio sea material, se podrá mostrar un aviso adicional en el sitio.
-            </p>
-          </section>
-        </div>
-
-        <div className="section-actions">
-          <Link href="/contacto" className="button button-primary">Contactar</Link>
-          <Link href="/legal/terms" className="button button-secondary">Términos y condiciones</Link>
-        </div>
-      </div>
-    </main>
-  );
+  return <main className="section legal-page"><div className="container narrow-container"><p className="vnext-kicker">LEGAL / PRIVACIDAD</p><h1>Privacidad del sitio</h1><p className="legal-updated">Última actualización: 18 de agosto de 2026</p><div className="legal-content">
+    <section><h2>1. Identidad y alcance</h2><p>Hocker AGI Technologies se utiliza en este sitio como marca del proyecto y del ecosistema. Este texto describe las prácticas del canal web y no debe interpretarse como evidencia de una razón social, RFC o representación jurídica que todavía no estén verificados públicamente. Para solicitudes relacionadas con privacidad utiliza <a href={`mailto:${PUBLIC_SITE.email}`}>{PUBLIC_SITE.email}</a>.</p></section>
+    <section><h2>2. Datos que puede recibir el sitio</h2><p>Nombre, empresa, correo, teléfono, necesidad, rango de inversión, mensaje, página de origen y parámetros de campaña. Para seguridad y diagnóstico también puede procesarse información técnica limitada como navegador y fecha de envío.</p></section>
+    <section><h2>3. Finalidades</h2><p>La información se utiliza para responder solicitudes, preparar diagnósticos o propuestas, dar seguimiento solicitado, prevenir abuso y medir el sitio únicamente cuando exista consentimiento para categorías opcionales.</p></section>
+    <section><h2>4. Proveedores y transferencias</h2><p>El sitio puede depender de servicios de hosting, correo, mensajería, analítica o automatización. Una integración solo se considera activa cuando está configurada. No afirmamos aquí un catálogo de subencargados que no haya sido verificado.</p></section>
+    <section id="cookies"><h2>5. Preferencias y medición</h2><p>Las funciones necesarias operan sin activar analítica ni publicidad opcionales. Puedes aceptar o rechazar esas categorías y modificar la decisión posteriormente mediante el control “Cambiar preferencias” visible en el sitio.</p></section>
+    <section><h2>6. Conservación y seguridad</h2><p>Los datos se conservan únicamente durante el tiempo necesario para atender la finalidad aplicable y obligaciones que correspondan. El sitio aplica controles técnicos razonables; ningún servicio conectado a Internet puede garantizar riesgo cero.</p></section>
+    <section><h2>7. Solicitudes de privacidad</h2><p>Puedes solicitar acceso, corrección, cancelación, oposición, revocación o limitación escribiendo a la dirección de contacto. La respuesta y verificación deberán ser proporcionales a la solicitud y al marco legal aplicable.</p></section>
+    <section><h2>8. Versión integral</h2><p>Antes de una operación contractual o tratamiento regulado, la documentación aplicable deberá identificar al responsable jurídico, domicilio, bases, transferencias, encargados, retención y mecanismos formales que correspondan a la jurisdicción y producto.</p></section>
+  </div><div className="section-actions"><Link href="/contacto" className="button button-primary">Contactar</Link><Link href="/legal/terms" className="button button-secondary">Términos de uso</Link></div></div></main>;
 }

@@ -1,12 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 
-const STORAGE_KEY = "hocker.analytics-consent.v1";
+const STORAGE_KEY = "hocker.consent.v2";
+const LEGACY_KEY = "hocker.analytics-consent.v1";
 const CONSENT_EVENT = `${STORAGE_KEY}:change`;
+const LEGACY_ACCEPTED = '{"analytics":true,"ads":true}';
+const LEGACY_REJECTED = '{"analytics":false,"ads":false}';
 
-type Consent = "accepted" | "rejected" | null;
+type ConsentState = { analytics: boolean; ads: boolean };
 type MetaPixel = ((...args: unknown[]) => void) & { queue: unknown[][] };
 
 function loadScript(id: string, src: string) {
@@ -18,11 +21,11 @@ function loadScript(id: string, src: string) {
   document.head.appendChild(script);
 }
 
-function enableAnalytics() {
+function enableOptionalMeasurement(consent: ConsentState) {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 
-  if (gaId) {
+  if (consent.analytics && gaId) {
     loadScript("hocker-ga", `https://www.googletagmanager.com/gtag/js?id=${gaId}`);
     const win = window as typeof window & { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void };
     win.dataLayer = win.dataLayer || [];
@@ -31,7 +34,7 @@ function enableAnalytics() {
     win.gtag("config", gaId, { anonymize_ip: true });
   }
 
-  if (pixelId) {
+  if (consent.ads && pixelId) {
     const win = window as typeof window & { fbq?: MetaPixel };
     if (!win.fbq) {
       const queue: unknown[][] = [];
@@ -47,71 +50,114 @@ function enableAnalytics() {
   }
 }
 
-function readConsent(): Consent {
+function readConsentSnapshot(): string | null {
   if (typeof window === "undefined") return null;
-
   try {
-    const stored = window.localStorage.getItem(STORAGE_KEY);
-    return stored === "accepted" || stored === "rejected" ? stored : null;
+    const current = window.localStorage.getItem(STORAGE_KEY);
+    if (current) return current;
+    const legacy = window.localStorage.getItem(LEGACY_KEY);
+    if (legacy === "accepted") return LEGACY_ACCEPTED;
+    if (legacy === "rejected") return LEGACY_REJECTED;
+  } catch {
+    return null;
+  }
+  return null;
+}
+
+function parseConsent(snapshot: string | null): ConsentState | null {
+  if (!snapshot) return null;
+  try {
+    const parsed = JSON.parse(snapshot) as Partial<ConsentState>;
+    return typeof parsed.analytics === "boolean" && typeof parsed.ads === "boolean"
+      ? { analytics: parsed.analytics, ads: parsed.ads }
+      : null;
   } catch {
     return null;
   }
 }
 
-function subscribeToConsent(callback: () => void) {
-  const handleStorage = (event: StorageEvent) => {
-    if (event.key === STORAGE_KEY) callback();
+function subscribe(callback: () => void) {
+  const storage = (event: StorageEvent) => {
+    if (event.key === STORAGE_KEY || event.key === LEGACY_KEY) callback();
   };
-  const handleConsentChange = () => callback();
-
-  window.addEventListener("storage", handleStorage);
-  window.addEventListener(CONSENT_EVENT, handleConsentChange);
-
+  const changed = () => callback();
+  window.addEventListener("storage", storage);
+  window.addEventListener(CONSENT_EVENT, changed);
   return () => {
-    window.removeEventListener("storage", handleStorage);
-    window.removeEventListener(CONSENT_EVENT, handleConsentChange);
+    window.removeEventListener("storage", storage);
+    window.removeEventListener(CONSENT_EVENT, changed);
   };
 }
 
-function subscribeToHydration() {
+function hydrationSubscription() {
   return () => undefined;
 }
 
 export function AnalyticsConsent() {
-  const consent = useSyncExternalStore(subscribeToConsent, readConsent, () => null);
-  const ready = useSyncExternalStore(subscribeToHydration, () => true, () => false);
+  const snapshot = useSyncExternalStore(subscribe, readConsentSnapshot, () => null);
+  const stored = useMemo(() => parseConsent(snapshot), [snapshot]);
+  const ready = useSyncExternalStore(hydrationSubscription, () => true, () => false);
+  const [open, setOpen] = useState(false);
+  const [draft, setDraft] = useState<ConsentState>({ analytics: false, ads: false });
 
   useEffect(() => {
-    if (consent === "accepted") enableAnalytics();
-  }, [consent]);
+    if (stored) enableOptionalMeasurement(stored);
+  }, [stored]);
 
-  const decide = (value: Exclude<Consent, null>) => {
-    try {
-      window.localStorage.setItem(STORAGE_KEY, value);
-    } finally {
-      window.dispatchEvent(new Event(CONSENT_EVENT));
-    }
+  const openPreferences = () => {
+    setDraft(stored ?? { analytics: false, ads: false });
+    setOpen(true);
   };
 
-  if (!ready || consent) return null;
+  const persist = (value: ConsentState) => {
+    const requiresReload = Boolean(
+      (stored?.analytics && !value.analytics) || (stored?.ads && !value.ads)
+    );
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(value));
+    window.localStorage.removeItem(LEGACY_KEY);
+    window.dispatchEvent(new Event(CONSENT_EVENT));
+    setOpen(false);
+    if (requiresReload) window.location.reload();
+  };
+
+  if (!ready) return null;
 
   return (
-    <aside className="consent-banner" aria-label="Preferencias de analítica">
-      <div>
-        <strong>Medición con privacidad</strong>
-        <p>
-          Usamos analítica opcional para entender el rendimiento del sitio y mejorar campañas. Puedes rechazarla sin perder funciones. Consulta el{" "}
-          <Link href="/legal/privacy">aviso de privacidad</Link>.
-        </p>
-      </div>
-      <div className="consent-actions">
-        <button type="button" className="button button-secondary" onClick={() => decide("rejected")}>
-          Rechazar
-        </button>
-        <button type="button" className="button button-primary" onClick={() => decide("accepted")}>
-          Aceptar
-        </button>
-      </div>
-    </aside>
+    <>
+      {!stored && !open ? (
+        <aside className="consent-banner" aria-label="Preferencias de privacidad">
+          <div>
+            <strong>Privacidad bajo tu control</strong>
+            <p>
+              Las funciones necesarias operan siempre. Analítica y publicidad son opcionales y se activan solo con tu decisión. {" "}
+              <Link href="/legal/privacy#cookies">Ver aviso</Link>.
+            </p>
+          </div>
+          <div className="consent-actions">
+            <button type="button" className="button button-secondary" onClick={() => persist({ analytics: false, ads: false })}>Solo necesarias</button>
+            <button type="button" className="button button-secondary" onClick={openPreferences}>Configurar</button>
+            <button type="button" className="button button-primary" onClick={() => persist({ analytics: true, ads: true })}>Aceptar opcionales</button>
+          </div>
+        </aside>
+      ) : null}
+
+      {stored ? <button type="button" className="privacy-preferences-trigger" onClick={openPreferences}>Cambiar preferencias</button> : null}
+
+      {open ? (
+        <div className="privacy-modal-backdrop" role="presentation" onMouseDown={(event) => { if (event.currentTarget === event.target) setOpen(false); }}>
+          <section className="privacy-modal" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
+            <div>
+              <p className="vnext-kicker">PRIVACIDAD</p>
+              <h2 id="privacy-title">Tus preferencias</h2>
+              <p>Puedes cambiar esta decisión cuando quieras. Las categorías opcionales permanecen desactivadas hasta que las autorices.</p>
+            </div>
+            <label className="privacy-option"><span><strong>Necesarias</strong><small>Seguridad, navegación y funciones esenciales.</small></span><input type="checkbox" checked disabled /></label>
+            <label className="privacy-option"><span><strong>Analítica</strong><small>Medición de rendimiento y comportamiento agregado.</small></span><input type="checkbox" checked={draft.analytics} onChange={(event) => setDraft((current) => ({ ...current, analytics: event.target.checked }))} /></label>
+            <label className="privacy-option"><span><strong>Publicidad</strong><small>Medición publicitaria opcional cuando exista un identificador configurado.</small></span><input type="checkbox" checked={draft.ads} onChange={(event) => setDraft((current) => ({ ...current, ads: event.target.checked }))} /></label>
+            <div className="consent-actions"><button type="button" className="button button-secondary" onClick={() => setOpen(false)}>Cancelar</button><button type="button" className="button button-primary" onClick={() => persist(draft)}>Guardar preferencias</button></div>
+          </section>
+        </div>
+      ) : null}
+    </>
   );
 }
