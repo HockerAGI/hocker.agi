@@ -1,0 +1,1 @@
+import Link from"next/link";export function DesktopNav({items}:{items:readonly{href:string;label:string}[]}){return <nav className="desktop-nav" aria-label="Navegación principal">{items.map(i=><Link key={i.href} href={i.href}>{i.label}</Link>)}</nav>}

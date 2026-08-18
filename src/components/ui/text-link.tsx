@@ -1,0 +1,1 @@
+import Link from"next/link";import type{ReactNode}from"react";export function TextLink({href,children}:{href:string;children:ReactNode}){return <Link className="text-link" href={href}>{children}<span aria-hidden="true">→</span></Link>}
