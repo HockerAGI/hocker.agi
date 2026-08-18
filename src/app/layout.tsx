@@ -7,6 +7,7 @@ import { PUBLIC_SITE } from "@/lib/public-site";
 import "./globals.css";
 import "./commercial.css";
 import "./polish.css";
+import "./vnext.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(PUBLIC_SITE.url),
@@ -17,18 +18,9 @@ export const metadata: Metadata = {
   },
   description: PUBLIC_SITE.description,
   category: "technology",
-  authors: [{ name: PUBLIC_SITE.founder }],
+  authors: [{ name: PUBLIC_SITE.founder, url: PUBLIC_SITE.founderProfile }],
   creator: PUBLIC_SITE.founder,
   publisher: PUBLIC_SITE.brand,
-  keywords: [
-    "automatización empresarial con IA",
-    "agencia de inteligencia artificial México",
-    "desarrollo de software a medida",
-    "captación de clientes",
-    "marketing digital con IA",
-    "integración de WhatsApp y CRM",
-    "Hocker AGI Technologies",
-  ],
   openGraph: {
     title: PUBLIC_SITE.title,
     description: PUBLIC_SITE.description,
@@ -55,10 +47,7 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  icons: {
-    icon: "/icon.png",
-    apple: "/apple-icon.png",
-  },
+  icons: { icon: "/icon.png", apple: "/apple-icon.png" },
 };
 
 const organizationSchema = {
@@ -66,7 +55,6 @@ const organizationSchema = {
   "@type": ["Organization", "ProfessionalService"],
   "@id": `${PUBLIC_SITE.url}/#organization`,
   name: PUBLIC_SITE.brand,
-  legalName: PUBLIC_SITE.legalName,
   url: PUBLIC_SITE.url,
   logo: `${PUBLIC_SITE.url}${PUBLIC_SITE.symbol}`,
   image: `${PUBLIC_SITE.url}${PUBLIC_SITE.ogImage}`,
@@ -76,19 +64,17 @@ const organizationSchema = {
   founder: {
     "@type": "Person",
     name: PUBLIC_SITE.founder,
+    url: `${PUBLIC_SITE.url}${PUBLIC_SITE.founderProfile}`,
   },
   areaServed: PUBLIC_SITE.areaServed,
-  sameAs: PUBLIC_SITE.relatedSites,
-  contactPoint: [
-    {
-      "@type": "ContactPoint",
-      contactType: "sales",
-      telephone: PUBLIC_SITE.phoneE164,
-      email: PUBLIC_SITE.email,
-      availableLanguage: ["es", "en"],
-      areaServed: "MX",
-    },
-  ],
+  contactPoint: [{
+    "@type": "ContactPoint",
+    contactType: "sales",
+    telephone: PUBLIC_SITE.phoneE164,
+    email: PUBLIC_SITE.email,
+    availableLanguage: ["es", "en"],
+    areaServed: "MX",
+  }],
 };
 
 const websiteSchema = {
@@ -106,16 +92,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="es-MX">
       <body>
-        <Script
-          id="organization-structured-data"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-        />
-        <Script
-          id="website-structured-data"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        />
+        <Script id="organization-structured-data" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
+        <Script id="website-structured-data" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
         <SiteShell>{children}</SiteShell>
         <AnalyticsConsent />
       </body>
