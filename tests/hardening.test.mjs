@@ -6,7 +6,7 @@ const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 
 test("official site uses patched framework and image processor", async () => {
   const pkg = JSON.parse(await read("package.json"));
-  assert.equal(pkg.dependencies.next, "16.2.12");
+  assert.equal(pkg.dependencies.next, "16.3.1");
   assert.equal(pkg.dependencies.react, "19.2.8");
   assert.equal(pkg.dependencies["react-dom"], "19.2.8");
   assert.equal(pkg.dependencies.sharp, "0.35.3");
