@@ -1,16 +1,5 @@
-const READINESS: Record<string, string> = {
-  "hocker-one": "Evolución activa",
-  "hocker-ads": "Desarrollo activo",
-  "hocker-hub": "Implementación por etapas",
-  "hocker-drive-cloud": "Implementación por etapas",
-  "hocker-wallet": "Consolidación técnica · alcance regulado",
-  "chido-casino": "Consolidación · sujeta a regulación",
-  "trackhok": "Diseño objetivo · uso autorizado",
-  "nexpa": "Diseño objetivo · consentimiento requerido",
-  "hocker-up": "Diseño objetivo",
-  "hocker-supply": "Consolidación funcional",
-};
-
-export function publicReadiness(slug: string, fallback: string) {
-  return READINESS[slug] ?? fallback;
-}
+export type PublicReadinessState="VERIFIED"|"DOCUMENTED"|"IN_PROGRESS"|"TARGET";
+export type PublicReadiness={state:PublicReadinessState;label:string};
+const R:Record<string,PublicReadiness>={
+"hocker-one":{state:"VERIFIED",label:"Evolución activa"},"hocker-ads":{state:"IN_PROGRESS",label:"Desarrollo activo"},"hocker-hub":{state:"IN_PROGRESS",label:"Implementación por etapas"},"hocker-drive-cloud":{state:"IN_PROGRESS",label:"Implementación por etapas"},"hocker-wallet":{state:"DOCUMENTED",label:"Consolidación técnica · alcance regulado"},"chido-casino":{state:"DOCUMENTED",label:"Consolidación · sujeta a regulación"},"trackhok":{state:"TARGET",label:"Diseño objetivo · uso autorizado"},"nexpa":{state:"TARGET",label:"Diseño objetivo · consentimiento requerido"},"hocker-up":{state:"TARGET",label:"Diseño objetivo"},"hocker-supply":{state:"DOCUMENTED",label:"Consolidación funcional"}};
+export function publicReadiness(slug:string,fallback="Estado por verificar"):PublicReadiness{return R[slug]??{state:"DOCUMENTED",label:fallback}}
