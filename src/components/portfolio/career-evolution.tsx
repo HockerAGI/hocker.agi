@@ -1,0 +1,1 @@
+import{CAREER_STAGES}from"@/content/portfolio/experience";export function CareerEvolution(){return <div className="career-list">{CAREER_STAGES.map(c=><article className="career-row" key={c.id}><strong className="stage">{c.stage}</strong><div><small>{c.period}</small><h3>{c.organization}</h3><strong>{c.role}</strong></div><p>{c.summary}</p></article>)}</div>}

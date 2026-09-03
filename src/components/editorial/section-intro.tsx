@@ -1,0 +1,1 @@
+import type{ReactNode}from"react";export function SectionIntro({eyebrow,title,copy}:{eyebrow:string;title:string;copy?:ReactNode}){return <div className="section-head"><div><p className="h-eyebrow">{eyebrow}</p><h2 className="h-h2">{title}</h2></div>{copy?<div className="h-copy">{copy}</div>:null}</div>}

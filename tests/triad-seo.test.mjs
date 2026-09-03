@@ -1,0 +1,4 @@
+import test from"node:test";import assert from"node:assert/strict";import{readFileSync}from"node:fs";const read=p=>readFileSync(new URL(`../${p}`,import.meta.url),"utf8");
+test("Organization schema stays factual",()=>{const s=read("src/app/layout.tsx")+read("src/lib/seo/schema.ts");assert.doesNotMatch(s,/legalName\s*:/);assert.doesNotMatch(s,/keywords\s*:/)});
+test("portfolio schema is ProfilePage Person and no invented sameAs",()=>{const p=read("src/app/portafolio/page.tsx")+read("src/lib/seo/schema.ts");assert.match(p,/ProfilePage/);assert.match(p,/Person/);assert.match(read("src/content/portfolio/profile.ts"),/linkedin:null,github:null/);assert.doesNotMatch(read("src/app/portafolio/page.tsx"),/sameAs:/)});
+test("sitemap includes portfolio cases without synthetic freshness",()=>{const s=read("src/app/sitemap.ts");assert.match(s,/portafolio/);assert.doesNotMatch(s,/new Date\(/);assert.doesNotMatch(s,/priority\s*:|changeFrequency\s*:/)});
