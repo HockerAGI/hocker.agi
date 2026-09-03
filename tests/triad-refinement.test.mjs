@@ -23,5 +23,5 @@ test("public portfolio does not expose implementation backlog", async () => {
 
 test("footer preserves official square lockup aspect", async () => {
   const footer = await read("src/components/navigation/site-footer.tsx");
-  assert.match(footer, /width=\"1536\" height=\"1536\"/);
+  assert.ok(footer.includes("width={1536} height={1536}"));
 });
