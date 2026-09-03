@@ -1,0 +1,42 @@
+/* Refinamiento visual posterior a QA humano. Overrides pequeños y aislados. */
+.section-light{background:#f2f4f8;color:#10131a}
+.section-light .h-copy,.section-light .h-lead{color:#3f4855}
+.section-light .intent-result p{color:#3f4855}
+.intent-result{min-height:0;border:1px solid rgba(16,19,26,.12);border-radius:18px}
+.section{scroll-margin-top:84px}
+.privacy-control{width:min(calc(100% - 40px),var(--h-content-max));margin:0 auto;padding:0 0 max(12px,env(safe-area-inset-bottom))}
+.privacy-preferences-trigger{position:static;display:inline-flex;align-items:center;min-height:44px;padding:.7rem 0;border:0;border-radius:0;background:transparent;color:var(--h-text-muted);font-size:.84rem;font-weight:650;text-decoration:underline;text-underline-offset:.2em}
+.privacy-preferences-trigger:hover,.privacy-preferences-trigger:focus-visible{color:var(--h-ice);background:transparent}
+.privacy-modal{max-height:calc(100dvh - 40px);overflow:auto}
+.footer-lockup{height:auto;aspect-ratio:1/1;object-fit:contain}
+@media(max-width:720px){
+  .section{padding:clamp(4rem,12vw,6rem) 0}
+  .hero{padding-top:2.4rem;padding-bottom:3.5rem}
+  .hero-copy .h-display{font-size:clamp(2.65rem,10vw,4rem);line-height:.97;max-width:11ch}
+  .hero-copy .h-lead{font-size:1.1rem;line-height:1.5;max-width:34ch}
+  .actions{margin-top:1.5rem;gap:.7rem}
+  .brand-stage{min-height:260px;margin-top:.5rem}
+  .brand-stage img{max-height:270px}
+  .section-head{gap:1rem;margin-bottom:2rem}
+  .section-head .h-h2{font-size:clamp(2rem,8.7vw,3rem);line-height:1.02}
+  .intent-result{padding:1.25rem;border-radius:18px}
+  .territory{padding:1.65rem 0}
+  .product-tile{min-height:220px;padding:20px}
+  .product-tile.flagship{min-height:300px}
+  .portfolio-hero{padding:3.3rem 0 3.5rem}
+  .portfolio-hero-grid{gap:2rem}
+  .profile-signal{padding-top:1rem}
+  .work-row{padding:1.2rem 1rem}
+  .career-row{padding:1.25rem 0}
+  .evidence-card{padding:18px}
+  .capability{padding:1.2rem 0}
+  .route-grid-spaced{margin-top:2rem}
+  .privacy-control{width:100%;padding-inline:16px}
+}
+@media(max-width:380px){
+  .hero-copy .h-display{font-size:clamp(2.45rem,10.6vw,3.25rem)}
+  .hero-copy .h-lead{font-size:1.02rem}
+  .brand-stage{min-height:235px}
+  .brand-stage img{max-height:245px}
+  .section{padding-block:3.75rem}
+}
