@@ -6,4 +6,4 @@ test("corporate shell has no permanent dock or console labels",()=>{const s=read
 test("Home rejects control-plane hero language",()=>{const s=read("src/app/page.tsx") + read("src/components/editorial/home-hero.tsx");assert.doesNotMatch(s,/SYSTEM VIEW|GOVERNED|CONTROL PLANE/)});
 
 test("public surface hides internal AGI implementation details",()=>{const s=read("src/app/agis/page.tsx")+read("src/components/agi/mission-selector.tsx")+read("src/content/agi/public-missions.ts")+read("src/components/agi/capability-explanation.tsx");assert.doesNotMatch(s,/Owner Gate|VISUAL_ONLY|memoria privada|runtime productivo|repositorios/i);assert.doesNotMatch(s,/VERTX|REVIA|JURIX|SYNTIA|HOSTIA/)});
-test("contact channels use semantic icons and real schemes",()=>{const s=read("src/components/ui/contact-actions.tsx");assert.match(s,/mailto:/);assert.match(s,/tel:/);assert.match(s,/https:\/\/wa\.me/);assert.match(s,/aria-label/)});
+test("contact channels use semantic icons and real schemes",()=>{const s=read("src/components/ui/contact-actions.tsx");assert.match(s,/mailto:/);assert.match(s,/tel:/);assert.match(s,/PUBLIC_SITE\.whatsapp|wa\.me/);assert.match(s,/aria-label/)});
