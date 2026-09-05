@@ -1,0 +1,4 @@
+Contact: mailto:contacto.hocker@gmail.com
+Policy: https://hockeragi.vercel.app/legal/privacy
+Preferred-Languages: es, en
+Expires: 2027-09-05T00:00:00Z
