@@ -3,7 +3,8 @@
   "git": {
     "deploymentEnabled": {
       "hocker-triad-ci-20260818": false,
-      "hocker-triad-preview-20260818": true
+      "hocker-triad-preview-20260818": true,
+      "fix/public-surface-security-clean-20260906": false
     }
   }
 }

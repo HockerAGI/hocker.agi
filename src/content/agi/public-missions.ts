@@ -1,6 +1,6 @@
 export const PUBLIC_MISSIONS=[
-{id:"launch-product",label:"Lanzar un nuevo producto",summary:"Estrategia, producto, growth, seguridad y evidencia trabajan como especialidades coordinadas.",specialists:["NOVA","VERTX","REVIA","NOVA ADS"],execution:"VISUAL_ONLY"as const},
-{id:"improve-acquisition",label:"Mejorar adquisición",summary:"Análisis de funnel, creatividad, medición y seguimiento sin ejecutar campañas desde la demo pública.",specialists:["NOVA","NOVA ADS","REVIA"],execution:"VISUAL_ONLY"as const},
-{id:"automate-operations",label:"Automatizar una operación",summary:"Contexto, proceso, riesgos y automatización se separan para mantener control humano proporcional al impacto.",specialists:["NOVA","SYNTIA","VERTX","HOSTIA"],execution:"VISUAL_ONLY"as const},
-{id:"review-risk",label:"Revisar un proyecto sensible",summary:"Especialistas técnicos, legales y de evidencia preparan análisis; las acciones materiales siguen sujetas a aprobación.",specialists:["NOVA","VERTX","JURIX","SYNTIA"],execution:"VISUAL_ONLY"as const}
-]as const;
+{id:"launch-product",label:"Lanzar un nuevo producto",summary:"Estrategia, producto, experiencia y crecimiento trabajan coordinados para convertir una idea en una salida concreta.",specialists:["Coordinación IA","Estrategia","Producto","Growth"]},
+{id:"improve-acquisition",label:"Mejorar adquisición",summary:"Analizamos funnel, creatividad, medición y seguimiento para detectar dónde se pierde demanda y qué mover primero.",specialists:["Coordinación IA","Growth","Creatividad","Analítica"]},
+{id:"automate-operations",label:"Automatizar una operación",summary:"Separamos objetivo, proceso, riesgos y automatización para construir una solución útil y controlable.",specialists:["Coordinación IA","Procesos","Automatización","Integraciones"]},
+{id:"review-risk",label:"Revisar un proyecto sensible",summary:"Combinamos análisis técnico, contexto, riesgos y documentación antes de recomendar una acción.",specialists:["Coordinación IA","Arquitectura","Riesgo","Evidencia"]}
+] as const;
