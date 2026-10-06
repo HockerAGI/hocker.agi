@@ -1,10 +1,1 @@
-{
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "git": {
-    "deploymentEnabled": {
-      "hocker-triad-ci-20260818": false,
-      "hocker-triad-preview-20260818": true,
-      "fix/public-surface-security-clean-20260906": false
-    }
-  }
-}
+{"$schema":"https://openapi.vercel.sh/vercel.json","git":{"deploymentEnabled":{"*":false,"main":true}}}
