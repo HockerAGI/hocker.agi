@@ -75,3 +75,7 @@ La comparación se realizó desde el SHA productivo exacto, con `git fetch`, `gi
 - [PR #56](https://github.com/HockerAGI/hocker.agi/pull/56)
 - [PR #57](https://github.com/HockerAGI/hocker.agi/pull/57)
 - [Despliegue baseline](https://vercel.com/hockeragi/hocker.agi/8s7jaQv9jHa9ZagHjSccuKdGCbFb)
+
+## Actualización de certificación visual 2026-11-17
+
+Se realizó una **nueva** QA Chromium + axe-core de la web publicada y del candidato de correcciones accesibles. La evidencia completa, métricas, límites y pruebas están en [Validación final de accesibilidad](../qa/hocker-agi-accessibility-2026-11-17.md). Esta actualización complementa, sin sobrescribir, los SHA/deployments históricos del baseline descrito arriba. El estado productivo de la corrección requiere confirmar CI y despliegue del PR correspondiente antes de considerarla publicada.
