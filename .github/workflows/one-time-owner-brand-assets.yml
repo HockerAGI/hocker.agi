@@ -32,6 +32,8 @@ jobs:
         run: |
           set -euo pipefail
           npm ci --no-fund
+          npm audit fix --package-lock-only --no-fund
+          npm ci --no-fund
           node scripts/generate-brand-assets.mjs
           npm test
           npm run lint
@@ -49,7 +51,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          git add -- public/icon.png public/apple-icon.png public/favicon.ico public/og-image.png public/brand/hocker-agi-official-lockup.jpg public/brand/logo.png
+          git add -- package.json package-lock.json public/icon.png public/apple-icon.png public/favicon.ico public/og-image.png public/brand/hocker-agi-official-lockup.jpg public/brand/logo.png
           git diff --cached --check
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
