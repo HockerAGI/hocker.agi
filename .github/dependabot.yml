@@ -13,8 +13,6 @@ updates:
         applies-to: version-updates
         patterns:
           - "next"
-          - "eslint-config-next"
-          - "@next/eslint-plugin-next"
         update-types:
           - minor
           - patch
@@ -24,16 +22,11 @@ updates:
           - "*"
         exclude-patterns:
           - "next"
-          - "eslint-config-next"
-          - "@next/eslint-plugin-next"
         update-types:
           - minor
           - patch
     ignore:
       - dependency-name: "@types/node"
-        update-types:
-          - "version-update:semver-major"
-      - dependency-name: "eslint"
         update-types:
           - "version-update:semver-major"
       - dependency-name: "typescript"
