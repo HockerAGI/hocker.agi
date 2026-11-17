@@ -129,7 +129,7 @@ export function AnalyticsConsent() {
       }
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
-      if (event.shiftKey && (document.activeElement === first || !dialog.contains(document.activeElement))) {
+      if (event.shiftKey && (document.activeElement === dialog || document.activeElement === first || !dialog.contains(document.activeElement))) {
         event.preventDefault();
         last.focus();
       } else if (!event.shiftKey && (document.activeElement === last || !dialog.contains(document.activeElement))) {
@@ -144,7 +144,7 @@ export function AnalyticsConsent() {
       window.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = previousOverflow;
       if (openerRef.current?.isConnected) openerRef.current.focus();
-      else document.querySelector<HTMLElement>(".privacy-preferences-trigger, .brand-link")?.focus();
+      else document.querySelector<HTMLElement>(".consent-actions button:nth-child(2), .privacy-preferences-trigger, .brand-link")?.focus();
     };
   }, [open]);
 
