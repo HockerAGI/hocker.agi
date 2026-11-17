@@ -167,15 +167,15 @@ export function AnalyticsConsent() {
             <p className="h-copy">Puedes cambiar esta decisión cuando quieras.</p>
             <label className="privacy-option">
               <span><strong>Necesarias</strong><small>Seguridad, navegación y funciones esenciales.</small></span>
-              <input type="checkbox" checked disabled />
+              <input type="checkbox" aria-label="Cookies necesarias (siempre activas)" checked disabled />
             </label>
             <label className="privacy-option">
               <span><strong>Analítica</strong><small>Medición agregada.</small></span>
-              <input type="checkbox" checked={draft.analytics} onChange={event => setDraft(current => ({ ...current, analytics: event.target.checked }))} />
+              <input type="checkbox" aria-label="Permitir analítica opcional" checked={draft.analytics} onChange={event => setDraft(current => ({ ...current, analytics: event.target.checked }))} />
             </label>
             <label className="privacy-option">
               <span><strong>Publicidad</strong><small>Medición publicitaria opcional.</small></span>
-              <input type="checkbox" checked={draft.ads} onChange={event => setDraft(current => ({ ...current, ads: event.target.checked }))} />
+              <input type="checkbox" aria-label="Permitir publicidad opcional" checked={draft.ads} onChange={event => setDraft(current => ({ ...current, ads: event.target.checked }))} />
             </label>
             <div className="consent-actions">
               <button className="button button-secondary" type="button" onClick={() => setOpen(false)}>Cancelar</button>

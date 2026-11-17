@@ -23,5 +23,12 @@ test("public portfolio does not expose implementation backlog", async () => {
 
 test("footer preserves official square lockup aspect", async () => {
   const footer = await read("src/components/navigation/site-footer.tsx");
-  assert.ok(footer.includes("width={1536} height={1536}"));
+  assert.ok(footer.includes("width={1024} height={1024}"));
+});
+
+test("brand identity icons use responsive sizes for navigation and footer",async()=>{
+  const header=await read("src/components/navigation/site-header.tsx");
+  const footer=await read("src/components/navigation/site-footer.tsx");
+  assert.ok(header.includes('sizes="(max-width: 720px) 40px, 44px"'));
+  assert.ok(footer.includes('sizes="245px"'));
 });

@@ -1,0 +1,30 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "eslint",
+    "typescript",
+    "unicorn",
+    "react",
+    "nextjs",
+    "jsx-a11y",
+    "import",
+    "oxc"
+  ],
+  "ignorePatterns": [
+    ".next/**",
+    "out/**",
+    "build/**",
+    "dist/**",
+    "node_modules/**",
+    "next-env.d.ts"
+  ],
+  "options": {
+    "denyWarnings": true
+  },
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/exhaustive-deps": "error",
+    "nextjs/no-img-element": "warn",
+    "jsx-a11y/prefer-tag-over-role": "off"
+  }
+}
