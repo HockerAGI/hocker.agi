@@ -14,6 +14,7 @@ export function SiteHeader() {
             alt="Isotipo oficial de Hocker AGI Technologies"
             width={512}
             height={512}
+            sizes="(max-width: 720px) 40px, 44px"
             priority
           />
           <span className="brand-wordmark" aria-hidden="true"><strong>HOCKER</strong><small>AGI TECHNOLOGIES</small></span>

@@ -25,3 +25,10 @@ test("footer preserves official square lockup aspect", async () => {
   const footer = await read("src/components/navigation/site-footer.tsx");
   assert.ok(footer.includes("width={1024} height={1024}"));
 });
+
+test("logo image derivatives use responsive sizes rather than 512/1024px at thumbnail dimensions",async()=>{
+  const header=await read("src/components/navigation/site-header.tsx");
+  const footer=await read("src/components/navigation/site-footer.tsx");
+  assert.match(header,/sizes="\\(max-width: 720px\\) 40px, 44px"/);
+  assert.match(footer,/sizes="245px"/);
+});
