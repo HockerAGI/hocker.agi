@@ -91,3 +91,8 @@ GitHub Actions y Vercel son gates finales, no herramientas de iteración visual.
 
 - Correo: contacto.hocker@gmail.com
 - WhatsApp: +52 664 209 1143
+
+## Continuidad y reconciliación
+
+- [Corte técnico 2026-11-17, SHA/deployment auditados y reconciliación de 12 ramas](docs/continuity/HOCKER_AGI_CLOSEOUT_2026-11-17.md).
+- El documento distingue baseline del release y estado dinámico de `main`; ninguna rama se declara eliminada sin verificación.
