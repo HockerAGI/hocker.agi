@@ -3,7 +3,7 @@
 **Fecha:** 2026-11-17  
 **Repositorio:** `HockerAGI/hocker.agi` exclusivamente  
 **Baseline de producción:** `d27275f56fca018ba60d473d5b3530aeb7be259e`  
-**Ámbito del candidato:** enlace de marca en cabecera, contraste de contenido legal y dos tests de regresión. Sin modificaciones a los PNG maestros, funnel, analítica, APIs, productos ni otros repositorios.
+**Ámbito del candidato:** enlace de marca en cabecera, contraste de contenido legal, gestión del foco en privacidad y tres tests de regresión. Sin modificaciones a los PNG maestros, funnel, analítica, APIs, productos ni otros repositorios.
 
 ## Defectos reales detectados
 
@@ -17,7 +17,8 @@ Se ejecutó Playwright Chromium y axe-core en un Vercel Sandbox aislado sobre la
 
 1. El enlace del logotipo toma su nombre accesible del **wordmark visible** y no de un `aria-label` divergente; el isotipo en imagen es decorativo (`alt=""`) porque el mismo enlace ya incluye texto de marca. No se altera ningún píxel de los activos originales.
 2. `layout.css` fija `#185e9d` para el eyebrow en `.legal-page` y texto `#1d2430` con fondo `#fff` para botones secundarios solo dentro de `.legal-page`. Ningún estilo oscuro global cambia.
-3. Dos pruebas estáticas de regresión impiden revertir inadvertidamente la semántica y el ajuste de color.
+3. La modal de privacidad recibe foco al abrir, contiene Tab/Shift+Tab y devuelve el foco al disparador correcto tras Escape o cierre, también cuando el botón de origen se desmonta durante la apertura.
+4. Tres pruebas estáticas de regresión impiden revertir inadvertidamente los contratos de semántica, contraste y foco.
 
 ## Validación del candidato compilado
 
@@ -42,6 +43,12 @@ QA real del servidor local compilado `http://127.0.0.1:3100`:
 - 0 excepciones JavaScript detectadas durante las visitas comprobadas.
 
 **Límite de certificación:** axe-core y Chromium no reemplazan pruebas manuales con lector de pantalla, Safari/WebKit/Firefox, zoom y revisión completa de todos los estados. **No se declara conformidad WCAG 2.2 AA total** con estas comprobaciones; se documentan exactamente los controles realizados.
+
+## Prueba adicional de estado modal
+
+Con el candidato compilado (Node 24, Next production) se abrió el diálogo de configuración de consentimiento en **320, 390 y 1440 px**. En las tres vistas se confirmó: foco inicial dentro del diálogo, navegación de Shift+Tab retenida dentro de sus controles, cierre mediante Escape y retorno al botón **Configurar**. Las tres ejecuciones extra de axe-core sobre el diálogo abierto no reportaron violaciones automáticas. Antes de esta corrección el foco podía permanecer en el documento o salir del diálogo; la mejora no altera consentimiento guardado ni inserta trackers.
+
+La batería `npm test` tras esta actualización aprobó **59/59 pruebas**, y Oxlint, TypeScript y el build siguieron en verde. Se comprobaron las rutas locales sin enviar formularios comerciales. El cierre remoto depende del CI exact-head y el deployment post-merge.
 
 ## Reglas para publicación
 
