@@ -1,3 +1,14 @@
 import test from"node:test";import assert from"node:assert/strict";import{readFileSync}from"node:fs";const read=p=>readFileSync(new URL(`../${p}`,import.meta.url),"utf8");
 test("lead endpoint retains request-boundary controls",()=>{const s=read("src/app/api/leads/route.ts");for(const x of[/content-length/i,/origin/i,/content-type/i,/website/i,/consent/i,/clean\(/])assert.match(s,x)});
 test("lead handoff uses canonical WhatsApp without full payload",()=>{const s=read("src/components/lead-form.tsx");assert.match(s,/PUBLIC_SITE\.whatsapp/);assert.doesNotMatch(s,/whatsappMessage|Proyecto\/empresa:|Quiero conversar sobre:/i)});
+
+test("lead capture reports success only after webhook persistence",()=>{
+  const api=read("src/app/api/leads/route.ts");
+  const form=read("src/components/lead-form.tsx");
+  assert.match(api,/status: 503/);
+  assert.match(api,/status: 502/);
+  assert.match(api,/captured: true/);
+  assert.match(form,/result\.captured!==true/);
+  assert.match(form,/status==="error"/);
+  assert.doesNotMatch(form,/Solicitud validada/);
+});

@@ -7,7 +7,38 @@ updates:
       day: monday
       time: "09:00"
       timezone: America/Tijuana
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 2
+    groups:
+      next-stack:
+        applies-to: version-updates
+        patterns:
+          - "next"
+          - "eslint-config-next"
+          - "@next/eslint-plugin-next"
+        update-types:
+          - minor
+          - patch
+      other-compatible:
+        applies-to: version-updates
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "next"
+          - "eslint-config-next"
+          - "@next/eslint-plugin-next"
+        update-types:
+          - minor
+          - patch
+    ignore:
+      - dependency-name: "@types/node"
+        update-types:
+          - "version-update:semver-major"
+      - dependency-name: "eslint"
+        update-types:
+          - "version-update:semver-major"
+      - dependency-name: "typescript"
+        update-types:
+          - "version-update:semver-major"
   - package-ecosystem: github-actions
     directory: /
     schedule:
@@ -15,4 +46,12 @@ updates:
       day: monday
       time: "09:30"
       timezone: America/Tijuana
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 1
+    groups:
+      compatible-actions:
+        applies-to: version-updates
+        patterns:
+          - "actions/*"
+        update-types:
+          - minor
+          - patch
