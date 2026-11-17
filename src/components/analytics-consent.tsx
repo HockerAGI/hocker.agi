@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 
 const STORAGE_KEY = "hocker.consent.v2";
 const LEGACY_KEY = "hocker.analytics-consent.v1";
@@ -100,6 +100,8 @@ export function AnalyticsConsent() {
   const ready = useSyncExternalStore(hydrationSubscription, () => true, () => false);
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState<ConsentState>({ analytics: false, ads: false });
+  const dialogRef = useRef<HTMLElement | null>(null);
+  const openerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (stored) enableOptionalMeasurement(stored);
@@ -107,8 +109,33 @@ export function AnalyticsConsent() {
 
   useEffect(() => {
     if (!open) return;
+    const dialog = dialogRef.current;
+    dialog?.focus();
+
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setOpen(false);
+        return;
+      }
+      if (event.key !== "Tab" || !dialog) return;
+      const focusable = Array.from(dialog.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )).filter((element) => element.getClientRects().length > 0);
+      if (focusable.length === 0) {
+        event.preventDefault();
+        dialog.focus();
+        return;
+      }
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && (document.activeElement === first || !dialog.contains(document.activeElement))) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && (document.activeElement === last || !dialog.contains(document.activeElement))) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener("keydown", onKeyDown);
     const previousOverflow = document.body.style.overflow;
@@ -116,10 +143,13 @@ export function AnalyticsConsent() {
     return () => {
       window.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = previousOverflow;
+      if (openerRef.current?.isConnected) openerRef.current.focus();
+      else document.querySelector<HTMLElement>(".privacy-preferences-trigger, .brand-link")?.focus();
     };
   }, [open]);
 
   const openPreferences = () => {
+    openerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     setDraft(stored ?? { analytics: false, ads: false });
     setOpen(true);
   };
@@ -161,7 +191,7 @@ export function AnalyticsConsent() {
 
       {open ? (
         <div className="privacy-modal-backdrop" role="presentation" onMouseDown={event => { if (event.currentTarget === event.target) setOpen(false); }}>
-          <section className="privacy-modal" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
+          <section ref={dialogRef} tabIndex={-1} className="privacy-modal" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
             <p className="h-eyebrow">PRIVACIDAD</p>
             <h2 id="privacy-title">Tus preferencias</h2>
             <p className="h-copy">Puedes cambiar esta decisión cuando quieras.</p>
