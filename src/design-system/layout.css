@@ -15,3 +15,6 @@
 @media(max-width:380px){.container{width:min(calc(100% - 24px),var(--h-content-max))}.actions{gap:8px}.button{padding:.72rem .9rem}.footer-links{grid-template-columns:1fr}.brand-stage{min-height:270px}.hero{padding-top:2.6rem}.product-tile{padding:18px}}
 @media(min-width:1800px){.container{width:min(calc(100% - 96px),var(--h-content-max))}.hero-grid{gap:9rem}.brand-stage{min-height:700px}}
 .section-light .h-eyebrow{color:#185e9d}.section-light .text-link span{color:#13579a}.section-blue .h-eyebrow,.section-blue .h-copy,.section-blue .h-lead{color:#f4f7fb}
+/* AA contrast on light-background legal pages. */
+.legal-page .h-eyebrow{color:#185e9d}
+.legal-page .button-secondary{color:#1d2430;background:#fff;border-color:#88909e}
