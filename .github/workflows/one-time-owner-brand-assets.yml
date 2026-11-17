@@ -7,7 +7,10 @@ permissions:
   contents: read
 jobs:
   generate:
-    if: ${{ github.repository == 'HockerAGI/hocker.agi' && github.ref == 'refs/heads/fix/transparent-brand-logo-20261117' && github.event.head_commit.message != 'chore(brand): generated approved technical assets' }}
+    if: >-
+      github.repository == 'HockerAGI/hocker.agi' &&
+      github.ref == 'refs/heads/fix/transparent-brand-logo-20261117' &&
+      github.event.head_commit.message != 'chore(brand): generated approved technical assets'
     runs-on: ubuntu-latest
     timeout-minutes: 22
     permissions:
