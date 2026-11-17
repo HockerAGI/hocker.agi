@@ -92,27 +92,42 @@ export async function POST(request: Request) {
   }
 
   const webhookUrl = process.env.LEADS_WEBHOOK_URL;
-  let captured = false;
-  if (webhookUrl) {
-    try {
-      const response = await fetch(webhookUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(process.env.LEADS_WEBHOOK_TOKEN
-            ? { Authorization: `Bearer ${process.env.LEADS_WEBHOOK_TOKEN}` }
-            : {}),
-        },
-        body: JSON.stringify({ event: "lead.created", lead }),
-        cache: "no-store",
-        signal: AbortSignal.timeout(8000),
-      });
-      captured = response.ok;
-      if (!response.ok) console.error("Lead webhook rejected request", response.status);
-    } catch (error) {
-      console.error("Lead webhook failed", error);
-    }
+  if (!webhookUrl) {
+    console.error("Lead capture is not configured");
+    return NextResponse.json(
+      { ok: false, captured: false, error: "No se pudo registrar la solicitud. Continúa por WhatsApp o correo." },
+      { status: 503 },
+    );
   }
 
-  return NextResponse.json({ ok: true, captured });
+  try {
+    const response = await fetch(webhookUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...(process.env.LEADS_WEBHOOK_TOKEN
+          ? { Authorization: `Bearer ${process.env.LEADS_WEBHOOK_TOKEN}` }
+          : {}),
+      },
+      body: JSON.stringify({ event: "lead.created", lead }),
+      cache: "no-store",
+      signal: AbortSignal.timeout(8000),
+    });
+
+    if (!response.ok) {
+      console.error("Lead webhook rejected request", response.status);
+      return NextResponse.json(
+        { ok: false, captured: false, error: "No se pudo registrar la solicitud. Continúa por WhatsApp o correo." },
+        { status: 502 },
+      );
+    }
+
+    return NextResponse.json({ ok: true, captured: true });
+  } catch (error) {
+    console.error("Lead webhook failed", error);
+    return NextResponse.json(
+      { ok: false, captured: false, error: "No se pudo registrar la solicitud. Continúa por WhatsApp o correo." },
+      { status: 502 },
+    );
+  }
 }
