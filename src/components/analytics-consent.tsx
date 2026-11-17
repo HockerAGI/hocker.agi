@@ -143,8 +143,17 @@ export function AnalyticsConsent() {
     return () => {
       window.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = previousOverflow;
-      if (openerRef.current?.isConnected) openerRef.current.focus();
-      else document.querySelector<HTMLElement>(".consent-actions button:nth-child(2), .privacy-preferences-trigger, .brand-link")?.focus();
+      const opener = openerRef.current;
+      requestAnimationFrame(() => {
+        if (opener?.isConnected) opener.focus();
+        else {
+          const fallback =
+            document.querySelector<HTMLElement>(".consent-actions button:nth-child(2)") ??
+            document.querySelector<HTMLElement>(".privacy-preferences-trigger") ??
+            document.querySelector<HTMLElement>(".brand-link");
+          fallback?.focus();
+        }
+      });
     };
   }, [open]);
 
