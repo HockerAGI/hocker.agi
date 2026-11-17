@@ -17,3 +17,13 @@ test("light legal surfaces override dark-theme eyebrow and button contrast", () 
   assert.match(layout, /\.legal-page \.h-eyebrow\{color:#185e9d\}/);
   assert.match(layout, /\.legal-page \.button-secondary\{color:#1d2430;background:#fff;border-color:#88909e\}/);
 });
+
+const consent = readFileSync("src/components/analytics-consent.tsx", "utf8");
+
+test("privacy preferences manage focus entry, tab cycling, and restoration", () => {
+  assert.match(consent, /dialogRef\.current/);
+  assert.match(consent, /dialog\?\.focus\(\)/);
+  assert.match(consent, /event\.key !== "Tab"/);
+  assert.match(consent, /openerRef\.current\?\.isConnected/);
+  assert.match(consent, /ref=\{dialogRef\} tabIndex=\{-1\}/);
+});
