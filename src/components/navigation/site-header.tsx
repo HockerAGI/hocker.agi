@@ -8,16 +8,16 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <div className="container site-header-inner">
-        <Link className="brand-link" href="/" aria-label="Hocker AGI Technologies · Inicio">
+        <Link className="brand-link" href="/">
           <Image
             src={PUBLIC_SITE.symbol}
-            alt="Isotipo oficial de Hocker AGI Technologies"
+            alt=""
             width={512}
             height={512}
             sizes="(max-width: 720px) 40px, 44px"
             priority
           />
-          <span className="brand-wordmark" aria-hidden="true"><strong>HOCKER</strong><small>AGI TECHNOLOGIES</small></span>
+          <span className="brand-wordmark"><strong>HOCKER</strong><small>AGI TECHNOLOGIES</small></span>
         </Link>
         <DesktopNav items={PUBLIC_NAV} />
         <Link className="button button-secondary nav-cta" href="/contacto">
