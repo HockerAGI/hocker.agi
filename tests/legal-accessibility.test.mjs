@@ -25,5 +25,6 @@ test("privacy preferences manage focus entry, tab cycling, and restoration", () 
   assert.match(consent, /dialog\?\.focus\(\)/);
   assert.match(consent, /event\.key !== "Tab"/);
   assert.match(consent, /openerRef\.current\?\.isConnected/);
+  assert.match(consent, /\.consent-actions button:nth-child\(2\)/);
   assert.match(consent, /ref=\{dialogRef\} tabIndex=\{-1\}/);
 });
