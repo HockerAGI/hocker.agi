@@ -40,3 +40,39 @@
   .brand-stage img{max-height:245px}
   .section{padding-block:3.75rem}
 }
+
+/* HOCKER TRIAD: premium refinement with original transparent logo. */
+.brand-link{gap:.72rem;min-width:0}
+.brand-link img{width:44px;height:44px;object-fit:contain;border-radius:0;flex:none;filter:drop-shadow(0 3px 9px rgba(50,110,195,.25))}
+.brand-wordmark{display:grid;gap:.12rem;line-height:1}
+.brand-wordmark strong{font-size:.93rem;font-weight:850;letter-spacing:.13em;color:#f4f7fb}
+.brand-wordmark small{font-size:.51rem;font-weight:750;letter-spacing:.16em;color:#aab7ca}
+.site-header{background:rgba(2,5,11,.88);border-bottom:1px solid rgba(150,188,232,.12)}
+.site-header-inner{gap:clamp(12px,2vw,28px)}
+.brand-stage{isolation:isolate}
+.brand-stage::before{width:84%;background:radial-gradient(circle,rgba(48,107,192,.19),rgba(26,63,124,.08) 38%,transparent 72%)}
+.brand-stage img{width:min(100%,660px);max-height:680px;object-fit:contain;filter:drop-shadow(0 30px 65px rgba(0,0,0,.55)) drop-shadow(0 0 44px rgba(48,114,203,.13))}
+.hero{background:radial-gradient(ellipse 57% 70% at 82% 42%,rgba(38,86,148,.16),transparent 74%),linear-gradient(125deg,#010102 25%,#090f19 100%)}
+.product-tile{transition:border-color var(--h-motion-standard),transform var(--h-motion-standard),box-shadow var(--h-motion-standard)}
+.product-tile:hover,.product-tile:focus-visible{border-color:rgba(86,156,229,.48);transform:translateY(-3px);box-shadow:0 18px 50px rgba(0,0,0,.22)}
+.product-tile .arrow{transition:transform var(--h-motion-standard)}
+.product-tile:hover .arrow,.product-tile:focus-visible .arrow{transform:translate(2px,-2px)}
+.work-row{transition:background var(--h-motion-standard)}
+.work-row:hover,.work-row:focus-visible{background:#101825}
+.evidence-card{transition:border-color var(--h-motion-standard)}
+.evidence-card:hover,.evidence-card:focus-within{border-color:rgba(86,156,229,.46)}
+.footer-lockup{width:min(100%,245px);height:auto;aspect-ratio:1/1;object-fit:contain;border-radius:0}
+.consent-banner{backdrop-filter:blur(18px)}
+@media(max-width:980px){.brand-wordmark strong{font-size:.84rem}.brand-wordmark small{font-size:.47rem}}
+@media(max-width:720px){
+ .brand-link img{width:40px;height:40px}
+ .brand-wordmark strong{font-size:.82rem}.brand-wordmark small{font-size:.46rem}
+ .brand-stage{min-height:250px;margin-top:.3rem}.brand-stage img{max-height:295px}
+ .consent-banner{left:max(10px,env(safe-area-inset-left));right:max(10px,env(safe-area-inset-right));bottom:max(10px,env(safe-area-inset-bottom));padding:12px 14px;gap:10px;border-radius:16px}
+ .consent-banner strong{font-size:.92rem}.consent-banner p{font-size:.8rem;line-height:1.4;margin:.25rem 0 0}
+ .consent-banner .consent-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ .consent-banner .consent-actions .button{min-height:44px;padding:.55rem .5rem;font-size:.8rem;line-height:1.2}
+ .consent-banner .consent-actions .button:last-child{grid-column:1/-1}
+}
+@media(max-width:380px){.brand-wordmark strong{font-size:.75rem}.brand-wordmark small{font-size:.42rem}.brand-stage img{max-height:260px}}
+@media(prefers-reduced-motion:reduce){.product-tile:hover,.product-tile:focus-visible{transform:none}.product-tile:hover .arrow,.product-tile:focus-visible .arrow{transform:none}}

@@ -11,11 +11,12 @@ export function SiteHeader() {
         <Link className="brand-link" href="/" aria-label="Hocker AGI Technologies · Inicio">
           <Image
             src={PUBLIC_SITE.symbol}
-            alt="Logo oficial de Hocker AGI Technologies"
-            width={1536}
-            height={1536}
+            alt="Isotipo oficial de Hocker AGI Technologies"
+            width={512}
+            height={512}
             priority
           />
+          <span className="brand-wordmark" aria-hidden="true"><strong>HOCKER</strong><small>AGI TECHNOLOGIES</small></span>
         </Link>
         <DesktopNav items={PUBLIC_NAV} />
         <Link className="button button-secondary nav-cta" href="/contacto">
